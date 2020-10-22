@@ -1,3 +1,8 @@
+
+This fork:
+Copyright (c) 2020 Jackson W | @Teknikal_Domain <jack@mail.tdstoragebay.com>
+
+Original work:
 The MIT License (MIT)
 
 Copyright (c) 2017 Sascha Brendel | @Lednerb <code@lednerb.de>

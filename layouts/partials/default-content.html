@@ -41,6 +41,10 @@
                 {{ end }}
             </span>
         {{ end }}
+
+        {{ if .Params.showComments | default true }}
+            <span class="disqus-comment-count" data-disqus-url="{{ .Permalink }}">Unable to load comment count</span>
+        {{ end }}
     </div>
 
     {{ if or (eq .template_type "single") (.ctx.Params.noSummary) }}

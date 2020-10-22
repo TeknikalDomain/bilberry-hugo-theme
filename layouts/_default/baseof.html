@@ -39,11 +39,7 @@
 {{- end -}}
 {{- end -}}
 
-{{- if eq .Site.Title .Title -}}
-    {{ .Scratch.Set "title" (.Site.Params.subtitle) }}
-{{- else -}}
-    {{ .Scratch.Set "title" (.Title) }}
-{{- end -}}
+{{ .Scratch.Set "title" (.Title) }}
 
 <!doctype html>
 <html class="no-js" lang="{{ .Site.Language.Lang }}">
@@ -58,7 +54,7 @@
     {{ hugo.Generator }}
     <title>
         {{ block "title" . }}
-           {{ if .Scratch.Get "title" }}
+           {{ if ne .Title .Site.Title }}
                {{ .Scratch.Get "title" }} &vert; {{ .Site.Title }}
            {{ else }}
                {{ .Site.Title }}
@@ -121,7 +117,6 @@
     {{ partial "mathjax.html" . }}
     {{ end }}
 
-
     <script type="text/javascript" src="{{ "theme.js" | absURL }}"></script>
 
     {{ if isset .Site.Params "js_modules" }}
@@ -130,9 +125,22 @@
     {{ end }}
     {{ end }}
 
+    {{ if .Site.DisqusShortname }}
+    <script id="dsq-count-scr" src="//{{ .Site.DisqusShortname }}.disqus.com/count.js" async></script>
+    {{ end }}
+
     {{ if and (isset .Site.Params "algolia_search") (eq .Site.Params.algolia_search true) }}
     {{ partial "algolia-search.html" . }}
     {{ end }}
+
+    {{ if eq .Params.googleCharts true }}
+    <script data-cfasync="false" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script async data-cfasync="false" src="chart_data.js"></script>
+    {{ end }}
+
+    <script type="application/javascript">
+        littlefoot.littlefoot()  // Pass any littlefoot settings here.
+    </script>
 </body>
 
 </html>

@@ -30,6 +30,20 @@
         </div>
         {{ end }}
 
+        {{ if and .Site.Taxonomies.categories (gt ( .Site.Params.amountCategoriesInFooter | default 7 ) 0 ) }}
+        <div class="tags">
+            <a href="{{ "/tags/" | relLangURL }}"><strong>{{ i18n "tags" }}</strong></a>
+            <ul>
+                {{ range $order, $taxonomy := (first ( .Site.Params.amountCategoriesInFooter | default 7 ) .Site.Taxonomies.tags.ByCount) }}
+                <li>
+                    <a href="{{ (print "/tags/" ($taxonomy.Name | urlize)) | relLangURL }}">{{ $taxonomy.Name | humanize }}
+                        ({{ $taxonomy.Count }})</a>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+        {{ end }}
+
         <div class="right">
             {{ if .Site.Params.showSocialMedia | default true }}
             <div class="external-profiles">
@@ -73,9 +87,10 @@
             </a>
             {{ with  .OutputFormats.Get "rss" -}}
             -
-            <a href="{{ .Permalink }}">{{ .Name }}</a>
+            <a href="/rss">{{ .Name }}</a>
             {{- end }}
         </div>
+        <script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#0f5417', 'I2I613SPZ');kofiwidget2.draw();</script>
         <div class="author">
             <a href="{{ .Site.Params.creditsUrl | default "https://github.com/Lednerb/bilberry-hugo-theme" }}"
                 target="_blank">{{ .Site.Params.creditsText | default "Bilberry Hugo Theme" }}</a>

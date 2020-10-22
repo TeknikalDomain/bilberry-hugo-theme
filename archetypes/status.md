@@ -6,5 +6,5 @@ icon: ""
 showDate: false
 categories: []
 tags: []
-author: ""
+author: "Teknikal_Domain"
 ---

@@ -5,7 +5,7 @@ draft: true
 
 categories: []
 tags: []
-author: ""
+author: "Teknikal_Domain"
 
 # Set your audio url for
 spotify:    ""      # (Spotify URI) spotify:track:43mGIUqxFoDQI4YiqbGmqd
