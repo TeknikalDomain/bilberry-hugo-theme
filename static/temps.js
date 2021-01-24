@@ -2,8 +2,8 @@
 // Fired on clicking a temperature figure
 function change_temp_unit() {
 	var temp_in_f = (localStorage.getItem('temp_in_f') === 'false');
-	update_temps()
     localStorage.setItem('temp_in_f', temp_in_f); // Toggle F <-> C and store
+	update_temps()
 }
 
 // DRY. Actually updates all the values,
@@ -24,9 +24,9 @@ function update_temps() {
 		var temp_c = parseFloat(temp.getAttribute('data-temp')); // ALWAYS in C
 		if (temp_in_f === true) {
 			// Only run conversion math if requested
-	        temp.innerHTML = ((temp_c * 1.8) + 32).toString() + "°" + "F";
+	        temp.innerHTML = (Math.round(((temp_c * 1.8) + 32) * 100) / 100).toString() + "°" + "F";
 		} else {
-			temp.innerHTML = temp_c.toString() + "°" + "C";
+			temp.innerHTML = (Math.round(temp_c * 100) / 100).toString() + "°" + "C";
 		}
 	}
 }
