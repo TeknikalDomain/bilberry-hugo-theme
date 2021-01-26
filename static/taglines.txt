@@ -51,5 +51,8 @@ Anyone figured out the reason their RSS readers sometimes give duplicates?
 Anyone found the secret re-randomize button yet?
 Are you really interested in Git things? Check out <a href="https://initialcommit.com">initialcommit.com</a>!
 Fact: The high-definition video image is made up of 2,073,600 pixels!
+Have I ever told you the definition of insanity? Insanity is... <em>hosting your own mail</em>
+A spoonful of LXC helps the virtualized environment come up...
+In reply to Elon Musk: Use Matrix.
 <PERCENT>
 <COUNT>
