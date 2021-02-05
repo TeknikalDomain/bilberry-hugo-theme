@@ -138,9 +138,11 @@
     <script async data-cfasync="false" src="chart_data.js"></script>
     {{ end }}
 
+    {{ if ( .Params.enableLittlefoot | default true ) }}
     <script type="application/javascript">
         littlefoot.littlefoot()  // Pass any littlefoot settings here.
     </script>
+    {{ end }}
 </body>
 
 </html>
