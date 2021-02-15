@@ -47,7 +47,7 @@ $(document).ready(function () {
 
     // Nav-Toggle
     $(".toggler").click(function () {
-        $("nav").slideToggle();
+        $("nav#topnav").slideToggle();
         $("#search").autocomplete("val", "");
     });
 
@@ -65,13 +65,13 @@ $(document).ready(function () {
     // Keyboard-Support
     $(document).keyup(function (e) {
         if (e.keyCode === 27) {
-            if (!$("nav").hasClass('permanentTopNav'))
-                $("nav").slideUp();
+            if (!$("nav#topnav").hasClass('permanentTopNav'))
+                $("nav#topnav").slideUp();
             $("#search").autocomplete("val", "");
         }
         else if (e.keyCode === 83 && !blockSearchFocus) {
-            if (!$("nav").hasClass('permanentTopNav'))
-                $("nav").slideDown();
+            if (!$("nav#topnav").hasClass('permanentTopNav'))
+                $("nav#topnav").slideDown();
             $("#search").focus();
         }
     })
@@ -84,6 +84,7 @@ $(document).ready(function () {
         pauseOnHover: true,
     });
 
+    /*
     // Magnific Popup for images within articles to zoom them
     // Rendered with Markdown
     $('p img').magnificPopup({
@@ -139,6 +140,7 @@ $(document).ready(function () {
         }
     });
 
+
     // Magnific Popup for images within articles to zoom them
     // Rendered with Asciidoc
     $('.image-block').magnificPopup({
@@ -154,6 +156,7 @@ $(document).ready(function () {
             enabled: true
         }
     });
+    */
 
     // Algolia-Search
     if ($('#activate-algolia-search').length) {
