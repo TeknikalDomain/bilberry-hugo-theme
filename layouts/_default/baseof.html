@@ -26,7 +26,7 @@
 {{ else if .Params.mp4videoImage }}
   {{ .Scratch.Set "image" (.Params.mp4videoImage | absURL) }}
 {{ else }}
-  {{ .Scratch.Set "image" (printf "https://www.gravatar.com/avatar/%s?size=200" (md5 .Site.Params.gravatarEMail)) }}
+  {{ .Scratch.Set "image" (.Site.Params.customImage | absURL ) }}
 {{ end }}
 
 {{- if ne .Description "" -}}
@@ -49,7 +49,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="siteBaseUrl" content="{{ .Site.BaseURL }}">
     <meta name="author" content="{{ .Site.Params.author }}">
-    <meta name="description" content="{{ .Site.Params.description }}">
+    <meta name="description" content="{{ .Scratch.Get "description" }}">
     <meta name="keywords" content="{{ .Site.Params.keywords }}">
     {{ hugo.Generator }}
     <title>
@@ -61,7 +61,6 @@
            {{ end }}
         {{ end }}
     </title>
-    <meta name="description" content="{{ .Scratch.Get "description" }}">
     <meta itemprop="name" content="{{ .Scratch.Get "title" }}">
     <meta itemprop="description" content="{{ .Scratch.Get "description" }}">
     <meta property="og:title" content="{{ .Scratch.Get "title" }}">
@@ -138,7 +137,7 @@
     <script async data-cfasync="false" src="chart_data.js"></script>
     {{ end }}
 
-    {{ if ( .Params.enableLittlefoot | default true ) }}
+    {{ if ( .Params.littlefoot | default true ) }}
     <script type="application/javascript">
         littlefoot.littlefoot()  // Pass any littlefoot settings here.
     </script>
