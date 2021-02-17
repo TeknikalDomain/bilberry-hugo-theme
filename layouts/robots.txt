@@ -1,2 +1,3 @@
 User-agent: *
+Disallow: /page/
 Sitemap: https://teknikaldomain.me/sitemap.xml
