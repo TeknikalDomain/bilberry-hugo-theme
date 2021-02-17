@@ -49,7 +49,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="siteBaseUrl" content="{{ .Site.BaseURL }}">
     <meta name="author" content="{{ .Site.Params.author }}">
-    <meta name="description" content="{{ .Scratch.Get "description" }}">
+    <meta name="description" content="{{ .Scratch.Get "description" | htmlEscape }}">
     <meta name="keywords" content="{{ .Site.Params.keywords }}">
     {{ hugo.Generator }}
     <title>
@@ -62,9 +62,9 @@
         {{ end }}
     </title>
     <meta itemprop="name" content="{{ .Scratch.Get "title" }}">
-    <meta itemprop="description" content="{{ .Scratch.Get "description" }}">
+    <meta itemprop="description" content="{{ .Scratch.Get "description" | htmlEscape }}">
     <meta property="og:title" content="{{ .Scratch.Get "title" }}">
-    <meta property="og:description" content="{{ .Scratch.Get "description" }}">
+    <meta property="og:description" content="{{ .Scratch.Get "description" | htmlEscape }}">
     <meta property="og:image" content="{{ .Scratch.Get "image" | absURL }}">
     <meta property="og:url" content="{{ .Permalink | absURL }}">
     <meta property="og:site_name" content="{{ .Site.Title }}">
