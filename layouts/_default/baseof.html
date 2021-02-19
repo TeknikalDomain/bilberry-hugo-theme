@@ -39,6 +39,10 @@
 {{- end -}}
 {{- end -}}
 
+{{ if eq .Description "summary" }}
+{{ .Scratch.Set "description" (.Summary | htmlUnescape | plainify | chomp) }}
+{{ end }}
+
 {{ .Scratch.Set "title" (.Title) }}
 
 <!doctype html>
