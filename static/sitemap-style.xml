@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <xsl:param name="loc" select="/sitemap:urlset/sitemap:url/sitemap:loc"/>
+    <xsl:template match="/">
+        <html>
+            <head>
+                <title>Sitemap for Teknikal's_Domain</title>
+            </head>
+            <body>
+                <h1>List of URLs for teknikaldomain.me:</h1>
+                <ul>
+                    <xsl:for-each select="sitemap:urlset/sitemap:url">
+                        <li><a href="{$loc}"><xsl:value-of select="sitemap:loc" /></a>, Last updated on <xsl:value-of select="sitemap:lastmod" />.</li>
+                    </xsl:for-each>
+                </ul>
+            </body>
+        </html>
+    </xsl:template>
+</xsl:stylesheet>
