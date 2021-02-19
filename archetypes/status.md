@@ -7,4 +7,5 @@ showDate: false
 categories: []
 tags: []
 author: "Teknikal_Domain"
+description: summary
 ---
