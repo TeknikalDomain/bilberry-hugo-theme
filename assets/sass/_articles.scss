@@ -180,13 +180,6 @@ article {
             a {
                 text-decoration: underline;
             }
-
-            a:not([href*='teknikaldomain.me']):not([href^='#']):not([href^='/']):not([href*='localhost']):after {
-                font-family: 'FontAwesome';
-                text-decoration: none;
-                font-style: normal;
-                content: " \f08e";
-            }
         }
 
         .task-list {
