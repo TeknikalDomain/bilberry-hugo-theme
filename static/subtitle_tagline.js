@@ -36,6 +36,5 @@ xmlHttp.onreadystatechange = function() {
     }
 }
 
-base = window.location.href.match(/(http.?:\/\/.*?\/)/gm)[0];
-xmlHttp.open("GET", base + "taglines.txt", true);
+xmlHttp.open("GET", "/taglines.txt", true);
 xmlHttp.send(null);
