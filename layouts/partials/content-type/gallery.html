@@ -16,11 +16,11 @@
             <ul class="slides">
                 {{ if and (.ctx.Site.Params.resizeImages | default true) (.ctx.Params.resizeImages | default true) }}
                     {{ range .ctx.Resources.ByType "image" }}
-                        <li><img src="{{ (.Fill "700x350 q95").RelPermalink }}" /></li>
+                        <li><img src="{{ (.Fill "1000x500 q95").RelPermalink }}" width="1000" height="500" /></li>
                     {{ end }}
                 {{ else }}
                     {{ range .ctx.Resources.ByType "image" }}
-                        <li><img src="{{ .RelPermalink }}" /></li>
+                        <li><img src="{{ .RelPermalink }}" width="1000" height="500" /></li>
                     {{ end }}
                 {{ end }}
             </ul>

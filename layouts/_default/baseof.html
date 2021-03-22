@@ -3,7 +3,7 @@
     {{ $imageUrl := "" }}
 
     {{ if and (.Site.Params.resizeImages | default true) (.Params.resizeImages | default true) }}
-        {{ $imageUrl = ($image.Fill "700x350 q95").Permalink }}
+        {{ $imageUrl = ($image.Fill "1000x500 q95").Permalink }}
     {{ else }}
         {{ $imageUrl = $image.Permalink }}
     {{ end }}
@@ -14,7 +14,7 @@
     {{ $imageUrl := "" }}
 
     {{ if and (.Site.Params.resizeImages | default true) (.Params.resizeImages | default true) }}
-         {{ $imageUrl = ((.Resources.GetMatch "featuredImage.*").Fill "700x350 q95").Permalink }}
+         {{ $imageUrl = ((.Resources.GetMatch "featuredImage.*").Fill "1000x500 q95").Permalink }}
     {{ else }}
         {{ $imageUrl = (.Resources.GetMatch "featuredImage.*").Permalink }}
     {{ end }}

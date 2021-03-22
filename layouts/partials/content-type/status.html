@@ -6,14 +6,14 @@
     {{ if .ctx.Resources.GetMatch "featuredImage.*" }}
         <div class="featured-image">
             {{ if and (.ctx.Site.Params.resizeImages | default true) (.ctx.Params.resizeImages | default true) }}
-                <img src="{{ ((.ctx.Resources.GetMatch "featuredImage.*").Fill "700x350 q95").RelPermalink }}" alt="">
+                <img src="{{ ((.ctx.Resources.GetMatch "featuredImage.*").Fill "1000x500 q95").RelPermalink }}" width="1000" height="500" alt="">
             {{ else }}
-                <img src="{{ (.ctx.Resources.GetMatch "featuredImage.*").RelPermalink }}" alt="">
+                <img src="{{ (.ctx.Resources.GetMatch "featuredImage.*").RelPermalink }}" width="1000" height="500" alt="">
             {{ end }}
         </div>
     {{ else if and (isset .ctx.Params "featuredimage") (ne .ctx.Params.featuredImage "") }}
         <div class="featured-image">
-            <img src="{{ .ctx.Params.featuredImage | relURL }}" alt="">
+            <img src="{{ .ctx.Params.featuredImage | relURL }}" width="1000" height="500" alt="">
         </div>
     {{ end }}
 
