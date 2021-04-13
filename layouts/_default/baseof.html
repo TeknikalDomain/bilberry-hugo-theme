@@ -72,6 +72,9 @@
     <meta property="og:image" content="{{ .Scratch.Get "image" | absURL }}">
     <meta property="og:url" content="{{ .Permalink | absURL }}">
     <meta property="og:site_name" content="{{ .Site.Title }}">
+    {{ if hasPrefix .RelPermalink "/page/" }}
+    <meta property="robots" content="none">
+    {{ end }}
     {{- if .IsPage }}
     <meta property="og:type" content="article">
     {{- else -}}
