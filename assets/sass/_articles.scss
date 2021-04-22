@@ -248,6 +248,7 @@ article {
                     color: inherit;
                     text-align: left;
                     padding: 0;
+                    text-decoration: none;
 
                     &:hover {
                         color: $highlight-color;
@@ -255,6 +256,14 @@ article {
                     }
                 }
             }
+        }
+
+        li a {
+            text-decoration: underline;
+        }
+
+        dd a {
+            text-decoration: underline;
         }
     }
 
