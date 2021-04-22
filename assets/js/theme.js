@@ -84,6 +84,22 @@ $(document).ready(function () {
         pauseOnHover: true,
     });
 
+    // Actually have color when using checkbox lists
+    // For explanation: by default, Goldmark will add the 'disabled'
+    // attribute to all checkboxes in a '- [x] checkbox list', which
+    // makes them not clickable, but also greyed out.
+    //
+    // By replacing that with 'onclick="return false"', we can retain
+    // the non-user-editable aspect while allowing them to actually
+    // be colored in. Why does returning false prevent the state toggle?
+    // Apparently someone thought that onclick() should have the ability
+    // to be used to decide if a(n) (un)check action should actually be
+    // valid or not. I was today years old when I learned this.
+    $('.content ul li input[type=checkbox]').each(function () {
+        $(this).attr("onclick", "return false");
+        $(this).prop("disabled", null)
+    });
+
     /*
     // Magnific Popup for images within articles to zoom them
     // Rendered with Markdown
