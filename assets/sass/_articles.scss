@@ -217,10 +217,17 @@ article {
             max-width: 100%;
             display: block;
             margin: 0 auto;
+
         }
 
-        video {
+        .video-container {
             max-width: 100%;
+            text-align: center;
+        }
+
+        table {
+            margin-left: auto;
+            margin-right: auto;
         }
 
         #TableOfContents {
