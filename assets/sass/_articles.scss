@@ -213,6 +213,36 @@ article {
             }
         }
 
+        details {
+
+            div {
+                padding: 0 5px;
+                border: 2px solid $base-color;
+                border-top: none;
+                color: $text-color;
+                margin: 0 10px;
+                border-radius: 0 0 5px 5px;
+
+                p {
+                    margin: 0;
+                    padding-bottom: 10px;
+                    &:last-child {
+                        padding: 0;
+                    }
+                }
+            }
+
+            summary {
+                padding: 5px;
+                border: 2px solid transparent;
+                background-color: $base-color;
+                border-radius: 10px;
+            }
+
+            box-sizing: border-box;
+            color: #f7f7f7;
+        }
+
         img {
             max-width: 100%;
             display: block;
