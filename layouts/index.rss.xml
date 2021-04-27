@@ -41,7 +41,7 @@
         {{ if eq .Params.imageSlider true }}
         <p><i>Note: The gallery images for this post cannot be displayed (easily) on an RSS feed. Please visit the real post URL to view them.</i></p>
         {{ end }}
-        {{ replace .Content "class=\"lazyload\" data-src" "src" | html }}
+        {{ replace .Content "data-src" "src" | html }}
       </description>
     </item>
     {{ end }}
