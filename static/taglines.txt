@@ -54,5 +54,7 @@ Fact: The high-definition video image is made up of 2,073,600 pixels!
 Have I ever told you the definition of insanity? Insanity is... <em>hosting your own mail</em>
 A spoonful of LXC helps the virtualized environment come up...
 In reply to Elon Musk: Use Matrix.
+May all your deployments exit with 0
+I don't have enough coffee for this
 <PERCENT>
 <COUNT>
