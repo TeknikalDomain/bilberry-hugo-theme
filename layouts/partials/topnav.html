@@ -1,7 +1,7 @@
 {{ if and .Site.Params.permanentTopNav .Site.Params.stickyNav }}
-    <nav class="permanentTopNav sticky">
+    <nav id="topnav" class="permanentTopNav sticky">
 {{ else if eq .Site.Params.permanentTopNav true }}
-    <nav class="permanentTopNav">
+    <nav id="topnav" class="permanentTopNav">
 {{ else }}
     <nav id="topnav">
 {{ end }}
