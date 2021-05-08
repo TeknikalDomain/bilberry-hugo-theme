@@ -1,31 +1,33 @@
 // dependencies
-require('jquery');
-require('flexslider');
-require('algoliasearch/dist/algoliasearch.jquery');
-require('autocomplete.js/dist/autocomplete.jquery');
-require('tooltipster');
-require('magnific-popup');
+require('jquery')
+require('flexslider')
+require('algoliasearch/dist/algoliasearch.jquery')
+require('autocomplete.js/dist/autocomplete.jquery')
+require('tooltipster')
+require('magnific-popup')
+require('lazysizes')
 
 let ClipboardJs = require('clipboard')
-let hljs = require('highlight.js');
-let moment = require('moment');
-require("moment/min/locales.min");
+let hljs = require('highlight.js')
+let moment = require('moment')
+require('moment/min/locales.min')
 
 // Add ClipboardJs to enable copy button functionality
 new ClipboardJs('.copy-button', {
     target: function(trigger) {
-        return trigger.previousElementSibling;
-    }
+        return trigger.previousElementSibling
+    },
 }).on('success', function(e) {
     e.clearSelection()
-});
+})
 
-$(document).ready(function () {
-
+$(document).ready(function() {
     // Add copy button and tooltip to each code-block
-    $('pre').each(function () {
-        $(this).append('<button class="copy-button tooltip" title="Copied!"><i class="far fa-fw fa-copy"></i></button>')
-    });
+    $('pre').each(function() {
+        $(this).append(
+            '<button class="copy-button tooltip" title="Copied!"><i class="far fa-fw fa-copy"></i></button>',
+        )
+    })
 
     $('.tooltip').tooltipster({
         animationDuration: 1,
@@ -36,53 +38,54 @@ $(document).ready(function () {
         trigger: 'custom',
         triggerOpen: {
             click: true,
-            tap: true
+            tap: true,
         },
         triggerClose: {
             click: true,
             tap: true,
-            mouseleave: true
-        }
-    });
+            mouseleave: true,
+        },
+    })
 
     // Nav-Toggle
-    $(".toggler").click(function () {
-        $("nav#topnav").slideToggle();
-        $("#search").autocomplete("val", "");
-    });
+    $('.toggler').click(function() {
+        $('nav#topnav').slideToggle()
+        $('#search').autocomplete('val', '')
+    })
 
+    /*
     // Commento support to block search focus when hitting the S key
-    blockSearchFocus = false;
+    blockSearchFocus = false
 
     $('#commento').focusin(function() {
-      blockSearchFocus = true;
-    });
+        blockSearchFocus = true
+    })
 
     $('#commento').focusout(function() {
-      blockSearchFocus = false;
-    });
+        blockSearchFocus = false
+    })
+    */
 
     // Keyboard-Support
-    $(document).keyup(function (e) {
+    $(document).keyup(function(e) {
         if (e.keyCode === 27) {
-            if (!$("nav#topnav").hasClass('permanentTopNav'))
-                $("nav#topnav").slideUp();
-            $("#search").autocomplete("val", "");
-        }
-        else if (e.keyCode === 83 && !blockSearchFocus) {
-            if (!$("nav#topnav").hasClass('permanentTopNav'))
-                $("nav#topnav").slideDown();
-            $("#search").focus();
+            if (!$('nav#topnav').hasClass('permanentTopNav'))
+                $('nav#topnav').slideUp()
+            $('#search').autocomplete('val', '')
+        } else if (e.keyCode === 83 && !blockSearchFocus) {
+            if (!$('nav#topnav').hasClass('permanentTopNav'))
+                $('nav#topnav').slideDown()
+            $('#search').focus()
         }
     })
 
     // Flexslider
     $('.flexslider').flexslider({
-        animation: "slide",
-        prevText: "",
-        nextText: "",
+        animation: 'slide',
+        prevText: '',
+        nextText: '',
         pauseOnHover: true,
-    });
+    })
 
     // Actually have color when using checkbox lists
     // For explanation: by default, Goldmark will add the 'disabled'
@@ -95,127 +98,134 @@ $(document).ready(function () {
     // Apparently someone thought that onclick() should have the ability
     // to be used to decide if a(n) (un)check action should actually be
     // valid or not. I was today years old when I learned this.
-    $('.content ul li input[type=checkbox]').each(function () {
-        $(this).attr("onclick", "return false");
-        $(this).prop("disabled", null)
-    });
+    $('.content ul li input[type=checkbox]').each(function() {
+        $(this).attr('onclick', 'return false')
+        $(this).prop('disabled', null)
+    })
 
     class Accordion {
-      constructor(el) {
-        // Store the <details> element
-        this.el = el;
-        // Store the <summary> element
-        this.summary = el.querySelector('summary');
-        // Store the <div class="content"> element
-        this.content = el.querySelector('div');
+        constructor(el) {
+            // Store the <details> element
+            this.el = el
+            // Store the <summary> element
+            this.summary = el.querySelector('summary')
+            // Store the <div class="content"> element
+            this.content = el.querySelector('div')
 
-        // Store the animation object (so we can cancel it if needed)
-        this.animation = null;
-        // Store if the element is closing
-        this.isClosing = false;
-        // Store if the element is expanding
-        this.isExpanding = false;
-        // Detect user clicks on the summary element
-        this.summary.addEventListener('click', (e) => this.onClick(e));
-      }
-
-      onClick(e) {
-        // Stop default behaviour from the browser
-        e.preventDefault();
-        // Add an overflow on the <details> to avoid content overflowing
-        this.el.style.overflow = 'hidden';
-        // Check if the element is being closed or is already closed
-        if (this.isClosing || !this.el.open) {
-          this.open();
-        // Check if the element is being openned or is already open
-        } else if (this.isExpanding || this.el.open) {
-          this.shrink();
-        }
-      }
-
-      shrink() {
-        // Set the element as "being closed"
-        this.isClosing = true;
-
-        // Store the current height of the element
-        const startHeight = `${this.el.offsetHeight}px`;
-        // Calculate the height of the summary
-        const endHeight = `${this.summary.offsetHeight}px`;
-
-        // If there is already an animation running
-        if (this.animation) {
-          // Cancel the current animation
-          this.animation.cancel();
+            // Store the animation object (so we can cancel it if needed)
+            this.animation = null
+            // Store if the element is closing
+            this.isClosing = false
+            // Store if the element is expanding
+            this.isExpanding = false
+            // Detect user clicks on the summary element
+            this.summary.addEventListener('click', e => this.onClick(e))
         }
 
-        // Start a WAAPI animation
-        this.animation = this.el.animate({
-          // Set the keyframes from the startHeight to endHeight
-          height: [startHeight, endHeight]
-        }, {
-          duration: 300,
-          easing: 'ease-out'
-        });
-
-        // When the animation is complete, call onAnimationFinish()
-        this.animation.onfinish = () => this.onAnimationFinish(false);
-        // If the animation is cancelled, isClosing variable is set to false
-        this.animation.oncancel = () => this.isClosing = false;
-      }
-
-      open() {
-        // Apply a fixed height on the element
-        this.el.style.height = `${this.el.offsetHeight}px`;
-        // Force the [open] attribute on the details element
-        this.el.open = true;
-        // Wait for the next frame to call the expand function
-        window.requestAnimationFrame(() => this.expand());
-      }
-
-      expand() {
-        // Set the element as "being expanding"
-        this.isExpanding = true;
-        // Get the current fixed height of the element
-        const startHeight = `${this.el.offsetHeight}px`;
-        // Calculate the open height of the element (summary height + content height)
-        const endHeight = `${this.summary.offsetHeight + this.content.offsetHeight}px`;
-
-        // If there is already an animation running
-        if (this.animation) {
-          // Cancel the current animation
-          this.animation.cancel();
+        onClick(e) {
+            // Stop default behaviour from the browser
+            e.preventDefault()
+            // Add an overflow on the <details> to avoid content overflowing
+            this.el.style.overflow = 'hidden'
+            // Check if the element is being closed or is already closed
+            if (this.isClosing || !this.el.open) {
+                this.open()
+                // Check if the element is being openned or is already open
+            } else if (this.isExpanding || this.el.open) {
+                this.shrink()
+            }
         }
 
-        // Start a WAAPI animation
-        this.animation = this.el.animate({
-          // Set the keyframes from the startHeight to endHeight
-          height: [startHeight, endHeight]
-        }, {
-          duration: 300,
-          easing: 'ease-out'
-        });
-        // When the animation is complete, call onAnimationFinish()
-        this.animation.onfinish = () => this.onAnimationFinish(true);
-        // If the animation is cancelled, isExpanding variable is set to false
-        this.animation.oncancel = () => this.isExpanding = false;
-      }
+        shrink() {
+            // Set the element as "being closed"
+            this.isClosing = true
 
-      onAnimationFinish(open) {
-        // Set the open attribute based on the parameter
-        this.el.open = open;
-        // Clear the stored animation
-        this.animation = null;
-        // Reset isClosing & isExpanding
-        this.isClosing = false;
-        this.isExpanding = false;
-        // Remove the overflow hidden and the fixed height
-        this.el.style.height = this.el.style.overflow = '';
-      }
+            // Store the current height of the element
+            const startHeight = `${this.el.offsetHeight}px`
+            // Calculate the height of the summary
+            const endHeight = `${this.summary.offsetHeight}px`
+
+            // If there is already an animation running
+            if (this.animation) {
+                // Cancel the current animation
+                this.animation.cancel()
+            }
+
+            // Start a WAAPI animation
+            this.animation = this.el.animate(
+                {
+                    // Set the keyframes from the startHeight to endHeight
+                    height: [startHeight, endHeight],
+                },
+                {
+                    duration: 300,
+                    easing: 'ease-out',
+                },
+            )
+
+            // When the animation is complete, call onAnimationFinish()
+            this.animation.onfinish = () => this.onAnimationFinish(false)
+            // If the animation is cancelled, isClosing variable is set to false
+            this.animation.oncancel = () => (this.isClosing = false)
+        }
+
+        open() {
+            // Apply a fixed height on the element
+            this.el.style.height = `${this.el.offsetHeight}px`
+            // Force the [open] attribute on the details element
+            this.el.open = true
+            // Wait for the next frame to call the expand function
+            window.requestAnimationFrame(() => this.expand())
+        }
+
+        expand() {
+            // Set the element as "being expanding"
+            this.isExpanding = true
+            // Get the current fixed height of the element
+            const startHeight = `${this.el.offsetHeight}px`
+            // Calculate the open height of the element (summary height + content height)
+            const endHeight = `${this.summary.offsetHeight +
+                this.content.offsetHeight}px`
+
+            // If there is already an animation running
+            if (this.animation) {
+                // Cancel the current animation
+                this.animation.cancel()
+            }
+
+            // Start a WAAPI animation
+            this.animation = this.el.animate(
+                {
+                    // Set the keyframes from the startHeight to endHeight
+                    height: [startHeight, endHeight],
+                },
+                {
+                    duration: 300,
+                    easing: 'ease-out',
+                },
+            )
+            // When the animation is complete, call onAnimationFinish()
+            this.animation.onfinish = () => this.onAnimationFinish(true)
+            // If the animation is cancelled, isExpanding variable is set to false
+            this.animation.oncancel = () => (this.isExpanding = false)
+        }
+
+        onAnimationFinish(open) {
+            // Set the open attribute based on the parameter
+            this.el.open = open
+            // Clear the stored animation
+            this.animation = null
+            // Reset isClosing & isExpanding
+            this.isClosing = false
+            this.isExpanding = false
+            // Remove the overflow hidden and the fixed height
+            this.el.style.height = this.el.style.overflow = ''
+        }
     }
 
-    document.querySelectorAll('details').forEach((el) => {
-      new Accordion(el);
-    });
+    document.querySelectorAll('details').forEach(el => {
+        new Accordion(el)
+    })
 
     /*
     // Magnific Popup for images within articles to zoom them
@@ -293,55 +303,78 @@ $(document).ready(function () {
 
     // Algolia-Search
     if ($('#activate-algolia-search').length) {
-        let client = algoliasearch($('#algolia-search-appId').val(), $('#algolia-search-apiKey').val());
-        let index = client.initIndex($('#algolia-search-indexName').val());
+        let client = algoliasearch(
+            $('#algolia-search-appId').val(),
+            $('#algolia-search-apiKey').val(),
+        )
+        let index = client.initIndex($('#algolia-search-indexName').val())
 
-        let autocompleteSource = $.fn.autocomplete.sources.hits(index, { hitsPerPage: 10 });
+        let autocompleteSource = $.fn.autocomplete.sources.hits(index, {
+            hitsPerPage: 10,
+        })
         if ($('#algolia-search-currentLanguageOnly').length) {
-            autocompleteSource = $.fn.autocomplete.sources.hits(index, { hitsPerPage: 5, filters: 'language: ' + $('html').attr('lang') });
+            autocompleteSource = $.fn.autocomplete.sources.hits(index, {
+                hitsPerPage: 5,
+                filters: 'language: ' + $('html').attr('lang'),
+            })
         }
 
-        $('#search').autocomplete({ hint: false, autoselect: true, debug: false },
-            [
+        $('#search')
+            .autocomplete({ hint: false, autoselect: true, debug: false }, [
                 {
                     source: autocompleteSource,
-                    displayKey: function (suggestion) {
+                    displayKey: function(suggestion) {
                         return suggestion.title || suggestion.author
                     },
                     templates: {
-                        suggestion: function (suggestion) {
-                            return "<span class='entry " + suggestion.type + "'>"
-                                + "<span class='title'>" + suggestion.title + "</span>"
-                                + "<span class='fas fa-fw " + suggestion.iconClass + "'></span>"
-                                + "</span>"
-                                ;
+                        suggestion: function(suggestion) {
+                            return (
+                                "<span class='entry " +
+                                suggestion.type +
+                                "'>" +
+                                "<span class='title'>" +
+                                suggestion.title +
+                                '</span>' +
+                                "<span class='fas fa-fw " +
+                                suggestion.iconClass +
+                                "'></span>" +
+                                '</span>'
+                            )
                         },
-                        empty: function () {
-                            return "<span class='empty'>" + $('#algolia-search-noSearchResults').val() + "</span>"
+                        empty: function() {
+                            return (
+                                "<span class='empty'>" +
+                                $('#algolia-search-noSearchResults').val() +
+                                '</span>'
+                            )
                         },
-                        footer: function () {
-                            return '<div class="branding">Powered by <img src="' + $('meta[name=siteBaseUrl]').attr("content") + '/algolia-logo-light.svg" alt="algolia" /></div>'
-                        }
+                        footer: function() {
+                            return (
+                                '<div class="branding">Powered by <img src="' +
+                                $('meta[name=siteBaseUrl]').attr('content') +
+                                '/algolia-logo-light.svg" alt="algolia" /></div>'
+                            )
+                        },
                     },
-                }
+                },
             ])
-            .on('autocomplete:selected', function (event, suggestion, dataset) {
-                window.location = (suggestion.url);
+            .on('autocomplete:selected', function(event, suggestion, dataset) {
+                window.location = suggestion.url
             })
-            .keypress(function (event, suggestion) {
+            .keypress(function(event, suggestion) {
                 if (event.which == 13) {
-                    window.location = (suggestion.url);
+                    window.location = suggestion.url
                 }
-            });
+            })
     }
 
     // MomentJS
-    language = $('html').attr('lang');
-    moment.locale(language);
+    language = $('html').attr('lang')
+    moment.locale(language)
     $('.moment').each(function() {
         date = $(this).text()
         $(this).text(moment(date).format('LL'))
-    });
-});
+    })
+})
 
-hljs.initHighlightingOnLoad();
+hljs.highlightAll()
