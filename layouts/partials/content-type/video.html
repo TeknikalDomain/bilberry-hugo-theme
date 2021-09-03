@@ -19,6 +19,21 @@
             </div>
         </div>
     {{ end }}
+	
+    {{ with .ctx.Params.peertube }}
+	<div class="responsive-video peertube">
+	  <iframe class="no-js-hidden" sandbox="allow-same-origin allow-scripts allow-popups" src="https://vids.tekdmn.me/videos/embed/{{ . }}?warningTitle=0" frameborder="0" allowfullscreen></iframe>
+
+	  <div class="no-js-message">
+	    The peertube player cannot be loaded with disabled javascript. <br>
+	    The following video is embedded here: <br>
+
+	    <a href="https://vids.tekdmn.me/w/{{ . }}" target="_blank">
+	      https://vids.tekdmn.me/w/{{ . }}
+	    </a>
+	  </div>
+	</div>
+    {{ end }}
 
     {{ with .ctx.Params.vimeo }}
         <div class="responsive-video vimeo">
