@@ -72,7 +72,7 @@ $(document).ready(function() {
             if (!$('nav#topnav').hasClass('permanentTopNav'))
                 $('nav#topnav').slideUp()
             $('#search').autocomplete('val', '')
-        } else if (e.keyCode === 83 && !blockSearchFocus) {
+        } else if (e.keyCode === 83) {
             if (!$('nav#topnav').hasClass('permanentTopNav'))
                 $('nav#topnav').slideDown()
             $('#search').focus()
