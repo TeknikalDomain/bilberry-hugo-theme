@@ -69,13 +69,28 @@ $(document).ready(function() {
     // Keyboard-Support
     $(document).keyup(function(e) {
         if (e.keyCode === 27) {
+            // Close topnav on escape
             if (!$('nav#topnav').hasClass('permanentTopNav'))
                 $('nav#topnav').slideUp()
             $('#search').autocomplete('val', '')
         } else if (e.keyCode === 83) {
+            // Activate topnav search with S
             if (!$('nav#topnav').hasClass('permanentTopNav'))
                 $('nav#topnav').slideDown()
             $('#search').focus()
+        } else if (e.keyCode === 80) {
+            // Toggle narration with P.
+            // Note: jQuery doesn't play nice with this at all,
+            // just returning a jQuery.fn.init,
+            // So this can't be done with it for some reason.
+            if (document.getElementById('narration-player')) {
+                player = document.getElementById('narration-player')
+                if (player.paused) {
+                    player.play()
+                } else {
+                    player.pause()
+                }
+            }
         }
     })
 

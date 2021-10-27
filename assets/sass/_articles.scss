@@ -17,6 +17,22 @@ article {
         left: -22px;
     }
 
+    div.article-extras {
+        border-bottom: 3px double $meta-border-color;
+        padding-bottom: 2.5%;
+        margin-bottom: 4.5%;
+
+        div.narration-container table {
+            margin-right: 0px;
+            margin-left: 0px;
+            margin-bottom: 0px;
+
+            th, td {
+                border: 0px;
+            }
+        }
+    }
+
     div.chips {
         display: block;
 
@@ -126,11 +142,14 @@ article {
             font-weight: bold;
         }
 
+        .meta.with-extras {
+            margin-bottom: 2rem;
+        }
+
         .meta {
             text-transform: uppercase;
             font-style: normal;
             letter-spacing: 1px;
-            margin-bottom: 2rem;
             font-size: 0.825em;
             color: $meta-text-color;
             padding-bottom: 2.5%;

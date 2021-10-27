@@ -5,7 +5,11 @@
         </a>
     </h1>
 
+    {{ if or (.ctx.Params.chips) (and .ctx.Params.narration (or (eq .template_type "single") (.ctx.Params.noSummary))) }}
+    <div class="meta with-extras">
+    {{ else }}
     <div class="meta">
+    {{ end }}
         {{ if ( .ctx.Params.showDate | default true ) }}
             {{ if ( .ctx.Site.Params.enableMomentJs | default true ) }}
                 <span class="date moment">{{ .ctx.PublishDate.Format "2006-01-02" }}</span>
@@ -47,37 +51,61 @@
         {{ end }}
     </div>
 
-    {{ if .ctx.Params.chips }}
-    <div class="chips">
-        {{ with .ctx.Params.chips.part }}
-        <span class="chip">
-        <span class="chip-left">Part</span>
-        <span class="chip-right">{{ . }}</span>
-        </span>
+    {{ if or (.ctx.Params.chips) (and .ctx.Params.narration (or (eq .template_type "single") (.ctx.Params.noSummary))) }}
+    <div class="article-extras">
+        {{ if .ctx.Params.chips }}
+        <div class="chips">
+            {{ with .ctx.Params.chips.part }}
+            <span class="chip">
+            <span class="chip-left">Part</span>
+            <span class="chip-right">{{ . }}</span>
+            </span>
+            {{ end }}
+            {{ with .ctx.Params.chips.lastUpdate }}
+            <span class="chip">
+            <span class="chip-left">Updated</span>
+            <span class="chip-right">{{ . }}</span>
+            </span>
+            {{ end }}
+            {{ if .ctx.Params.chips.needsRework }}
+            <a href="/page/needs-rework">
+            <span class="simple-chip" id="rework-chip">
+            Needs rework
+            </span>
+            </a>
+            {{ end }}
+            {{ with .ctx.Params.chips.outdated }}
+            <a href="{{ . }}">
+            <span class="simple-chip" id="outdated-chip">Outdated</span>
+            </a>
+            {{ end }}
+            {{ if .ctx.Params.chips.improved }}
+            <span class="simple-chip" id="improved-chip">New and improved!</span>
+            {{ end }}
+        </div>
+        {{ if and .ctx.Params.narration (or (eq .template_type "single") (.ctx.Params.noSummary)) }}
+                <hr />
         {{ end }}
-        {{ with .ctx.Params.chips.lastUpdate }}
-        <span class="chip">
-        <span class="chip-left">Updated</span>
-        <span class="chip-right">{{ . }}</span>
-        </span>
         {{ end }}
-        {{ if .ctx.Params.chips.needsRework }}
-        <a href="/page/needs-rework">
-        <span class="simple-chip" id="rework-chip">
-        Needs rework
-        </span>
-        </a>
-        {{ end }}
-        {{ with .ctx.Params.chips.outdated }}
-        <a href="{{ . }}">
-        <span class="simple-chip" id="outdated-chip">Outdated</span>
-        </a>
-        {{ end }}
-        {{ if .ctx.Params.chips.improved }}
-        <span class="simple-chip" id="improved-chip">New and improved!</span>
+        {{ if and .ctx.Params.narration (or (eq .template_type "single") (.ctx.Params.noSummary)) }}
+        <div class="narration-container">
+            <table>
+                <tr>
+                    <td>
+                        This article has narration:<br />
+                        (Press the 'p' key to toggle playback)
+                    </td>
+                    <td>
+                        <audio controls preload="metadata" id="narration-player">
+                            <source src="{{ .ctx.Params.narration }}" />
+                            <p>Your browser does not support the HTML5 <code>&lt;audio&gt;</code> element, it seems, so this isn't available.</p>
+                        </audio>
+                    </td>
+                </tr>
+            </table>
+        </div>
         {{ end }}
     </div>
-    <hr />
     {{ end }}
 
     {{ if or (eq .template_type "single") (.ctx.Params.noSummary) }}
