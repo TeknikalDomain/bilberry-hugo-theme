@@ -281,6 +281,22 @@ article {
             a {
                 text-decoration: underline;
             }
+
+            th {
+                text-align: center;
+            }
+
+            td[align="right"] {
+                text-align: right;
+            }
+
+            td[align="center"] {
+                text-align: center;
+            }
+
+            td[align="left"] {
+                text-align: left;
+            }
         }
 
         #TableOfContents {
