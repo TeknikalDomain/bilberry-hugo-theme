@@ -45,6 +45,21 @@
     </div>
 {{ end }}
 
+{{ if eq .type "peertube" }}
+    <div class="responsive-video peertube">
+      <iframe class="no-js-hidden" sandbox="allow-same-origin allow-scripts allow-popups" src="https://vids.tekdmn.me/videos/embed/{{ .id }}?warningTitle=0" frameborder="0" allowfullscreen></iframe>
+
+      <div class="no-js-message">
+	The PeerTube player can not be loaded with disabled JavaScript. <br>
+	The following video is embedded here: <br>
+
+	<a href="https://vids.tekdmn.me/w/{{ .id }}?warningTitle=0" target="_blank">
+	  https://vids.tekdmn.me/w/{{ .id }}
+	</a>
+      </div>
+    </div>
+{{ end }}
+
 {{ if eq .type "mp4" }}
     <div class="responsive-video local">
         <video width="100%" controls poster="{{ .imageUrl }}">
