@@ -53,18 +53,38 @@ $(document).ready(function() {
         $('#search').autocomplete('val', '')
     })
 
-    /*
     // Commento support to block search focus when hitting the S key
-    blockSearchFocus = false
+    blockSearchFocusCommento = false;
 
     $('#commento').focusin(function() {
-        blockSearchFocus = true
-    })
+        blockSearchFocusCommento = true;
+    });
 
     $('#commento').focusout(function() {
-        blockSearchFocus = false
-    })
-    */
+        blockSearchFocusCommento = false;
+    });
+
+    // Utterances support to block search focus when hitting the S key
+    blockSearchFocusUtterances = false;
+
+    $('#utterances').focusin(function() {
+        blockSearchFocusUtterances = true;
+    });
+
+    $('#utterances').focusout(function() {
+        blockSearchFocusUtterances = false;
+    });
+
+    // Giscus support to block search focus when hitting the S key
+    blockSearchFocusGiscus = false;
+
+    $('#giscus').focusin(function() {
+        blockSearchFocusGiscus = true;
+    });
+
+    $('#giscus').focusout(function() {
+        blockSearchFocusGiscus = false;
+    });
 
     // Keyboard-Support
     $(document).keyup(function(e) {
@@ -73,7 +93,7 @@ $(document).ready(function() {
             if (!$('nav#topnav').hasClass('permanentTopNav'))
                 $('nav#topnav').slideUp()
             $('#search').autocomplete('val', '')
-        } else if (e.keyCode === 83) {
+        } else if (e.keyCode === 83 && !blockSearchFocusCommento || !blockSearchFocusUtterances || !blockSearchFocusGiscus) {
             // Activate topnav search with S
             if (!$('nav#topnav').hasClass('permanentTopNav'))
                 $('nav#topnav').slideDown()

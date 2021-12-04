@@ -1,3 +1,6 @@
-<div class="video-container">
-    <video src="{{ .Get 0 }}" {{ with .Get 1 }}width="{{.}}"{{end}} {{ with .Get 2 }}height="{{.}}"{{end}} controls preload />
-</div>
+{{ $type := .Get "type" }}
+{{ if eq $type "mp4"}}
+    {{ partial "video-embed" (dict "type" $type "url" (.Get "url") "imageUrl" (.Get "imageUrl")) }}
+{{ else }}
+    {{ partial "video-embed" (dict "type" $type "id" (.Get "id")) }}
+{{ end }}

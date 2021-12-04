@@ -494,7 +494,7 @@ article {
     }
 
     // Video
-    &.video {
+    &.video, &.article {
         .responsive-video {
             position: relative;
             /* 16:9 ratio*/
@@ -514,11 +514,9 @@ article {
     }
 
     // Audio
-    &.audio {
-        .responsive-audio {
-            iframe {
-                width: 100%;
-            }
+    &.audio, &.article {
+        .responsive-audio iframe, .responsive-audio audio {
+            width: 100%;
         }
     }
 
