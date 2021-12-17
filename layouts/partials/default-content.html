@@ -47,7 +47,7 @@
         {{ end }}
 
         {{ if .ctx.Params.showComments | default true }}
-            <span class="disqus-comment-count" data-disqus-url="{{ .ctx.Permalink }}">Unable to load comment count</span>
+            <span><a href="{{ .ctx.Permalink }}#commento">Unable to load comment count</a></span>
         {{ end }}
     </div>
 
