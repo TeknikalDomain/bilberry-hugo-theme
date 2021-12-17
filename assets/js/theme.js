@@ -93,7 +93,7 @@ $(document).ready(function() {
             if (!$('nav#topnav').hasClass('permanentTopNav'))
                 $('nav#topnav').slideUp()
             $('#search').autocomplete('val', '')
-        } else if (e.keyCode === 83 && !blockSearchFocusCommento || !blockSearchFocusUtterances || !blockSearchFocusGiscus) {
+        } else if (e.keyCode === 83 && (!blockSearchFocusCommento || !blockSearchFocusUtterances || !blockSearchFocusGiscus)) {
             // Activate topnav search with S
             if (!$('nav#topnav').hasClass('permanentTopNav'))
                 $('nav#topnav').slideDown()
