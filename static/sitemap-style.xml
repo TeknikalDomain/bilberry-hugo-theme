@@ -24,10 +24,11 @@
                 <nav id="topnav">
                     <div class="container">
                         <ul class="topnav">
+			    <li><a href="https://teknikaldomain.me/page/contact/">Contact</a></li>
                             <li><a href="https://teknikaldomain.me/page/errata/">Errata</a></li>
                             <li><a href="/index.xml" target="_blank">RSS</a></li>
                             <li><a href="https://teknikaldomain.me/page/donations-box/">Donations Box</a></li>
-                            <li><a href="/categories/youtube" target="">YouTube Uploads</a></li>
+                            <li><a href="/video" target="">My Videos</a></li>
                         </ul>
                         <div id="search-box" class="search">
                             <i class="fas fa-search"></i>
@@ -46,7 +47,7 @@
                         <div class="titles">
                             <h3 class="title">
                                 <a href="/">
-                                    Teknikal&#39;s_Domain
+                                    Tek&#39;s Domain
                                 </a>
                             </h3>
                             <span class="subtitle" onclick="setTagline()">#&lt;NTA:NnT:SSrgS:H6.6-198:W200-90.72:CBWg&gt;</span>
