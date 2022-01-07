@@ -86,19 +86,26 @@ $(document).ready(function() {
         blockSearchFocusGiscus = false;
     });
 
+    let doingSearch = false;
+
+    $('#search').focusin(function() { doingSearch = true })
+    $('#search').focusout(function() { doingSearch = false })
+
     // Keyboard-Support
     $(document).keyup(function(e) {
         if (e.keyCode === 27) {
             // Close topnav on escape
             if (!$('nav#topnav').hasClass('permanentTopNav'))
                 $('nav#topnav').slideUp()
+                doingSearch = false
             $('#search').autocomplete('val', '')
         } else if (e.keyCode === 83 && !(blockSearchFocusCommento || blockSearchFocusUtterances || blockSearchFocusGiscus)) {
             // Activate topnav search with S
             if (!$('nav#topnav').hasClass('permanentTopNav'))
                 $('nav#topnav').slideDown()
+                doingSearch = true
             $('#search').focus()
-        } else if (e.keyCode === 80) {
+        } else if (e.keyCode === 80 && !doingSearch) {
             // Toggle narration with P.
             // Note: jQuery doesn't play nice with this at all,
             // just returning a jQuery.fn.init,

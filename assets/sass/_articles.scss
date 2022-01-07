@@ -31,62 +31,62 @@ article {
                 border: 0px;
             }
         }
-    }
 
-    div.chips {
-        display: block;
+        div.chips {
+            display: block;
 
-        span.simple-chip {
-            border: 2px $base-color solid;
-            border-radius: 50px;
-            overflow: hidden;
-            display: inline-flex;
-            padding: 2px 5px 0 5px;
-            font-family: $headline-font;
-            font-weight: bold;
-            font-style: normal;
-            color: $page-background-color;
-            background-color: $base-color;
-        }
-
-        span#rework-chip.simple-chip {
-            border-color: red;
-            background-color: red;
-        }
-
-        span#outdated-chip.simple-chip {
-            border-color: orange;
-            background-color: orange;
-            color: $text-color;
-        }
-
-        span#improved-chip.simple-chip {
-            border-color: #0ee;
-            background-color: #0ee;
-            color: $text-color;
-        }
-
-        span.chip {
-            border: 2px $base-color solid;
-            border-radius: 50px;
-            overflow: hidden;
-            display: inline-flex;
-            font-style: normal;
-
-            span.chip-left {
-                background-color: $base-color;
-                color: $page-background-color;
+            span.simple-chip {
+                border: 2px $base-color solid;
+                border-radius: 50px;
                 overflow: hidden;
-                padding: 2px 4px 0 5px;
+                display: inline-flex;
+                padding: 2px 5px 0 5px;
                 font-family: $headline-font;
                 font-weight: bold;
+                font-style: normal;
+                color: $page-background-color;
+                background-color: $base-color;
             }
 
-            span.chip-right {
-                padding: 2px 5px 0 4px;
-                font-family: $headline-font;
+            span#rework-chip.simple-chip {
+                border-color: red;
+                background-color: red;
             }
 
+            span#outdated-chip.simple-chip {
+                border-color: orange;
+                background-color: orange;
+                color: $text-color;
+            }
+
+            span#improved-chip.simple-chip {
+                border-color: #0ee;
+                background-color: #0ee;
+                color: $text-color;
+            }
+
+            span.chip {
+                border: 2px $base-color solid;
+                border-radius: 50px;
+                overflow: hidden;
+                display: inline-flex;
+                font-style: normal;
+
+                span.chip-left {
+                    background-color: $base-color;
+                    color: $page-background-color;
+                    overflow: hidden;
+                    padding: 2px 4px 0 5px;
+                    font-family: $headline-font;
+                    font-weight: bold;
+                }
+
+                span.chip-right {
+                    padding: 2px 5px 0 4px;
+                    font-family: $headline-font;
+                }
+
+            }
         }
     }
 
