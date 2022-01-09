@@ -417,6 +417,11 @@ $(document).ready(function() {
         date = $(this).text()
         $(this).text(moment(date).format('LL'))
     })
+
+    // Mathjax No-JS
+    $('.math-container').each(function() {
+	this.innerHTML = this.getAttribute('data-mathjax')
+    })
 })
 
 hljs.highlightAll()
