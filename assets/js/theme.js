@@ -21,6 +21,38 @@ new ClipboardJs('.copy-button', {
     e.clearSelection()
 })
 
+// Subtitle taglines
+let taglines = []
+let rawsub = ''
+let subtitle = $('.subtitle')[0]
+
+function setTagline() {
+    let thisTagline = taglines[Math.floor(Math.random() * taglines.length)]
+
+    if (rawsub == '') {
+	rawsub = subtitle.innerHTML
+    }
+
+    subtitle.innerHTML = rawsub
+
+    if (thisTagline == '') {
+	return
+    }
+
+    if (thisTagline == '<COUNT>') {
+	thisTagline = taglines.length + ' taglines and counting...'
+    }
+
+    if (thisTagline == '<PERCENT>') {
+	thisTagline =
+	    "Did you know what if you're looking for a specific tagline in here, there's only a " +
+	    (1 / taglines.length) * 100 +
+	    "% chance of getting it each load?"
+    }
+
+    subtitle.innerHTML = rawsub + ' | ' + thisTagline
+}
+
 // Custom temperature display
 function changeTempUnit() {
     var tempInF = localStorage.getItem('temp_in_f') === 'false'
@@ -455,9 +487,24 @@ $(document).ready(function() {
 	this.innerHTML = this.getAttribute('data-mathjax')
     })
 
+    // Subtitle tagline refresh on click
+    $('.subtitle').click(setTagline)
+
     // Toggle temps
     updateTemps()
     $('.temperature-reading').click(changeTempUnit)
 })
 
 hljs.highlightAll()
+
+// Do tagline fetch
+let xmlHttp = new XMLHttpRequest()
+xmlHttp.onreadystatechange = function() {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+	taglines = xmlHttp.responseText.split('\n')
+	setTagline()
+    }
+}
+
+xmlHttp.open('GET', '/taglines.txt', true)
+xmlHttp.send(null)
