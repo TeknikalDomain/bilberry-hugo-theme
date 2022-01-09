@@ -21,6 +21,38 @@ new ClipboardJs('.copy-button', {
     e.clearSelection()
 })
 
+// Custom temperature display
+function changeTempUnit() {
+    var tempInF = localStorage.getItem('temp_in_f') === 'false'
+    localStorage.setItem('temp_in_f', tempInF) // Toggle F <-> C and store
+    updateTemps()
+}
+
+function updateTemps() {
+    var tempInF = localStorage.getItem('temp_in_f') === 'true'
+
+    // Default to displaying in C if unspecificed (aka never ran before)
+    if (tempInF === null) {
+        localStorage.setItem('temp_in_f', false)
+        tempInF = false
+    }
+
+    // Process each figure
+    $('.temperature-reading').each(function() {
+        var tempC = parseFloat(this.getAttribute('data-temp')) // ALWAYS in C
+        if (tempInF === true) {
+            // Only run conversion math if requested
+            this.innerHTML =
+                (Math.round((tempC * 1.8 + 32) * 100) / 100).toString() +
+                '°' +
+                'F'
+        } else {
+            this.innerHTML =
+                (Math.round(tempC * 100) / 100).toString() + '°' + 'C'
+        }
+    })
+}
+
 $(document).ready(function() {
     // Add copy button and tooltip to each code-block
     $('pre').each(function() {
@@ -422,6 +454,10 @@ $(document).ready(function() {
     $('.math-container').each(function() {
 	this.innerHTML = this.getAttribute('data-mathjax')
     })
+
+    // Toggle temps
+    updateTemps()
+    $('.temperature-reading').click(changeTempUnit)
 })
 
 hljs.highlightAll()
