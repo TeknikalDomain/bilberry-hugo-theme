@@ -1,1 +1,1 @@
-<span class="math-container" data-mathjax="${{ .Get 0 }}$">{{ if (.Get 1) }}{{ .Get 1 }}{{ else }}{{ .Get 0 }}{{end}}</span>{{- "" -}}
+<span class="math-container" data-mathjax="${{ .Get 0 }}$">{{ if (.Get 1) }}{{ .Get 1 | safeHTML }}{{ else }}{{ .Get 0 }}{{end}}</span>{{- "" -}}
