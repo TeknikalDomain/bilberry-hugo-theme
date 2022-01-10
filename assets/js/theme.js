@@ -150,6 +150,28 @@ $(document).ready(function() {
         blockSearchFocusGiscus = false;
     });
 
+    // Utterances support to block search focus when hitting the S key
+    blockSearchFocusUtterances = false;
+
+    $('#utterances').focusin(function() {
+        blockSearchFocusUtterances = true;
+    });
+
+    $('#utterances').focusout(function() {
+        blockSearchFocusUtterances = false;
+    });
+
+    // Giscus support to block search focus when hitting the S key
+    blockSearchFocusGiscus = false;
+
+    $('#giscus').focusin(function() {
+        blockSearchFocusGiscus = true;
+    });
+
+    $('#giscus').focusout(function() {
+        blockSearchFocusGiscus = false;
+    });
+
     let doingSearch = false;
 
     $('#search').focusin(function() { doingSearch = true })
