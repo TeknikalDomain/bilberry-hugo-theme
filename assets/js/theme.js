@@ -4,7 +4,6 @@ require('flexslider')
 require('algoliasearch/dist/algoliasearch.jquery')
 require('autocomplete.js/dist/autocomplete.jquery')
 require('tooltipster')
-require('magnific-popup')
 require('lazysizes')
 
 let ClipboardJs = require('clipboard')
@@ -30,24 +29,24 @@ function setTagline() {
     let thisTagline = taglines[Math.floor(Math.random() * taglines.length)]
 
     if (rawsub == '') {
-	rawsub = subtitle.innerHTML
+        rawsub = subtitle.innerHTML
     }
 
     subtitle.innerHTML = rawsub
 
     if (thisTagline == '') {
-	return
+        return
     }
 
     if (thisTagline == '<COUNT>') {
-	thisTagline = taglines.length + ' taglines and counting...'
+        thisTagline = taglines.length + ' taglines and counting...'
     }
 
     if (thisTagline == '<PERCENT>') {
-	thisTagline =
-	    "Did you know what if you're looking for a specific tagline in here, there's only a " +
-	    (1 / taglines.length) * 100 +
-	    "% chance of getting it each load?"
+        thisTagline =
+            "Did you know what if you're looking for a specific tagline in here, there's only a " +
+            (1 / taglines.length) * 100 +
+            '% chance of getting it each load?'
     }
 
     subtitle.innerHTML = rawsub + ' | ' + thisTagline
@@ -118,64 +117,68 @@ $(document).ready(function() {
     })
 
     // Commento support to block search focus when hitting the S key
-    blockSearchFocusCommento = false;
+    blockSearchFocusCommento = false
 
     $('#commento').focusin(function() {
-        blockSearchFocusCommento = true;
-    });
+        blockSearchFocusCommento = true
+    })
 
     $('#commento').focusout(function() {
-        blockSearchFocusCommento = false;
-    });
+        blockSearchFocusCommento = false
+    })
 
     // Utterances support to block search focus when hitting the S key
-    blockSearchFocusUtterances = false;
+    blockSearchFocusUtterances = false
 
     $('#utterances').focusin(function() {
-        blockSearchFocusUtterances = true;
-    });
+        blockSearchFocusUtterances = true
+    })
 
     $('#utterances').focusout(function() {
-        blockSearchFocusUtterances = false;
-    });
+        blockSearchFocusUtterances = false
+    })
 
     // Giscus support to block search focus when hitting the S key
-    blockSearchFocusGiscus = false;
+    blockSearchFocusGiscus = false
 
     $('#giscus').focusin(function() {
-        blockSearchFocusGiscus = true;
-    });
+        blockSearchFocusGiscus = true
+    })
 
     $('#giscus').focusout(function() {
-        blockSearchFocusGiscus = false;
-    });
+        blockSearchFocusGiscus = false
+    })
 
     // Utterances support to block search focus when hitting the S key
-    blockSearchFocusUtterances = false;
+    blockSearchFocusUtterances = false
 
     $('#utterances').focusin(function() {
-        blockSearchFocusUtterances = true;
-    });
+        blockSearchFocusUtterances = true
+    })
 
     $('#utterances').focusout(function() {
-        blockSearchFocusUtterances = false;
-    });
+        blockSearchFocusUtterances = false
+    })
 
     // Giscus support to block search focus when hitting the S key
-    blockSearchFocusGiscus = false;
+    blockSearchFocusGiscus = false
 
     $('#giscus').focusin(function() {
-        blockSearchFocusGiscus = true;
-    });
+        blockSearchFocusGiscus = true
+    })
 
     $('#giscus').focusout(function() {
-        blockSearchFocusGiscus = false;
-    });
+        blockSearchFocusGiscus = false
+    })
 
-    let doingSearch = false;
+    let doingSearch = false
 
-    $('#search').focusin(function() { doingSearch = true })
-    $('#search').focusout(function() { doingSearch = false })
+    $('#search').focusin(function() {
+        doingSearch = true
+    })
+    $('#search').focusout(function() {
+        doingSearch = false
+    })
 
     // Keyboard-Support
     $(document).keyup(function(e) {
@@ -183,13 +186,20 @@ $(document).ready(function() {
             // Close topnav on escape
             if (!$('nav#topnav').hasClass('permanentTopNav'))
                 $('nav#topnav').slideUp()
-                doingSearch = false
+            doingSearch = false
             $('#search').autocomplete('val', '')
-        } else if (e.keyCode === 83 && !(blockSearchFocusCommento || blockSearchFocusUtterances || blockSearchFocusGiscus)) {
+        } else if (
+            e.keyCode === 83 &&
+            !(
+                blockSearchFocusCommento ||
+                blockSearchFocusUtterances ||
+                blockSearchFocusGiscus
+            )
+        ) {
             // Activate topnav search with S
             if (!$('nav#topnav').hasClass('permanentTopNav'))
                 $('nav#topnav').slideDown()
-                doingSearch = true
+            doingSearch = true
             $('#search').focus()
         } else if (e.keyCode === 80 && !doingSearch) {
             // Toggle narration with P.
@@ -506,7 +516,7 @@ $(document).ready(function() {
 
     // Mathjax No-JS
     $('.math-container').each(function() {
-	this.innerHTML = this.getAttribute('data-mathjax')
+        this.innerHTML = this.getAttribute('data-mathjax')
     })
 
     // Subtitle tagline refresh on click
@@ -523,8 +533,8 @@ hljs.highlightAll()
 let xmlHttp = new XMLHttpRequest()
 xmlHttp.onreadystatechange = function() {
     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-	taglines = xmlHttp.responseText.split('\n')
-	setTagline()
+        taglines = xmlHttp.responseText.split('\n')
+        setTagline()
     }
 }
 
