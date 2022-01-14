@@ -42,7 +42,7 @@
         <p><i>Note: The gallery images for this post cannot be displayed (easily) on an RSS feed. Please visit the real post URL to view them.</i></p>
         {{ end }}
         {{ with .Params.peertube }}
-        <p>Video link: <a href="https://vids.tekdmn.me/w/{{ . }}">https://vids.tekdmn.me/w/{{ . }}</a>.</p>
+        <p>Video link: <a href="{{ . }}">{{ . }}</a>.</p>
         {{ end }}
         {{ replace .Content "data-src" "src" | html }}
       </description>
