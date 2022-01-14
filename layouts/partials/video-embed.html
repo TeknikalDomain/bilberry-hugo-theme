@@ -45,21 +45,6 @@
     </div>
 {{ end }}
 
-{{ if eq .type "peertube" }}
-    <div class="responsive-video peertube">
-      <iframe class="no-js-hidden" sandbox="allow-same-origin allow-scripts allow-popups" src="https://vids.tekdmn.me/videos/embed/{{ .id }}?warningTitle=0" frameborder="0" allowfullscreen></iframe>
-
-      <div class="no-js-message">
-	The PeerTube player can not be loaded with disabled JavaScript. <br>
-	The following video is embedded here: <br>
-
-	<a href="https://vids.tekdmn.me/w/{{ .id }}?warningTitle=0" target="_blank">
-	  https://vids.tekdmn.me/w/{{ .id }}
-	</a>
-      </div>
-    </div>
-{{ end }}
-
 {{ if eq .type "bilibili" }}
     <div class="responsive-video bilibili" style="padding-bottom: 75%">
         <iframe
@@ -75,6 +60,23 @@
                 https://www.bilibili.com/video/{{ .id }}
             </a>
         </div>
+    </div>
+{{ end }}
+
+{{ if (eq .type "peertube") }}
+{{- $srcUrl := urls.Parse .id -}}
+{{- $embedUrl := printf "%s://%s/videos/embed/%s" $srcUrl.Scheme $srcUrl.Host ($srcUrl.Path | path.Base) -}}
+    <div class="responsive-video peertube">
+      <iframe class="no-js-hidden" sandbox="allow-same-origin allow-scripts allow-popups" src="{{ $embedUrl }}" frameborder="0" allowfullscreen></iframe>
+
+      <div class="no-js-message">
+	The PeerTube player can not be loaded with disabled JavaScript. <br>
+	The following video is embedded here: <br>
+
+	<a href="{{ .id }}" target="_blank">
+	  {{ .id }}
+	</a>
+      </div>
     </div>
 {{ end }}
 
