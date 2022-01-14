@@ -57,13 +57,13 @@
     <meta name="keywords" content="{{ .Site.Params.keywords }}">
     {{ hugo.Generator }}
     <title>
-        {{ block "title" . }}
-           {{ if ne .Title .Site.Title }}
+        {{- block "title" . -}}
+           {{- if ne .Title .Site.Title -}}
                {{ .Scratch.Get "title" }} &vert; {{ .Site.Title }}
-           {{ else }}
+           {{- else -}}
                {{ .Site.Title }}
-           {{ end }}
-        {{ end }}
+           {{- end -}}
+        {{- end -}}
     </title>
     <meta itemprop="name" content="{{ .Scratch.Get "title" }}">
     <meta itemprop="description" content="{{ .Scratch.Get "description" | htmlEscape }}">
