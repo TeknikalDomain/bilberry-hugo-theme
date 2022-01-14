@@ -1,6 +1,6 @@
 
 This fork:
-Copyright (c) 2020 Jackson W | @Teknikal_Domain <jack@mail.tdstoragebay.com>
+Copyright (c) 2020-2022 Teknikal_Domain <jack@mail.tdstoragebay.com>
 
 Original work:
 The MIT License (MIT)
