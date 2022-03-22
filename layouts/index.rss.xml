@@ -11,7 +11,7 @@
 {{- $pages = $pages | first $limit -}}
 {{- end -}}
 {{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:tkd_mstdn="https://tekdmn.me/page/rss-ns/tkd-mstdn#">
   <channel>
     <title>{{ if eq  .Title  .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{.}} on {{ end }}{{ .Site.Title }}{{ end }}</title>
     <link>{{ .Permalink }}</link>
@@ -46,6 +46,10 @@
         {{ end }}
         {{ replace .Content "data-src" "src" | html }}
       </description>
+      {{ with .Params.hashtags }}<tkd_mstdn:hashtags>{{ range . }}#{{ . }} {{ end }}</tkd_mstdn:hashtags>{{end}}
+      {{ if .Params.mastodon }}<tkd_mstdn:tootAllowed>YES</tkd_mstdn:tootAllowed>{{ else }}<tkd_mstdn:tootAllowed>NO</tkd_mstdn:tootAllowed>{{ end }}
+      <tkd_mstdn:summary>{{ if eq .Params.description "summary" }}{{ .Summary | htmlUnescape | plainify | chomp }}{{ else }}{{ .Params.description }}{{ end }}</tkd_mstdn:summary>
+      <tkd_mstdn:altLink>https://tekdmn.me{{ .RelPermalink }}</tkd_mstdn:altLink>
     </item>
     {{ end }}
   </channel>
