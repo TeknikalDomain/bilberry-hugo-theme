@@ -2,7 +2,7 @@
 {{ $imgSizeX := index (split $imgSizeFragment "x") 0 }}
 {{ $imgSizeY := index (split $imgSizeFragment "x") 1 }}
 {{ if or (hasPrefix .Destination "https://teknikaldomain.me/cdn") (hasPrefix .Destination "/cdn") }}
-<img class="lazyload" data-zoom-src="{{ .Destination | replaceRE "\\.(?:png|jpg)$" "" }}_detailed.png" data-src="{{ .Destination }}" alt="{{ .Text }}" title="{{ .Title }}" {{ with $imgSizeX }}width="{{ . }}"{{ end }} {{ with $imgSizeY }}height="{{ . }}"{{ end }} data-zoomable="true"/>
+<img class="lazyload" data-zoom-src="{{ replaceRE "(.+)\\.(png|jpe?g)#.*$" "$1%5fdetailed.$2" .Destination 2 }}" data-src="{{ .Destination }}" alt="{{ .Text }}" title="{{ .Title }}" {{ with $imgSizeX }}width="{{ . }}"{{ end }} {{ with $imgSizeY }}height="{{ . }}"{{ end }} data-zoomable="true"/>
 {{ else }}
 <img class="lazyload" data-src="{{ .Destination }}" alt="{{ .Text }}" title="{{ .Title }}" {{ with $imgSizeX }}width="{{ . }}"{{ end }} {{ with $imgSizeY }}height="{{ . }}"{{ end }} data-zoomable="true"/>
 {{ end }}
