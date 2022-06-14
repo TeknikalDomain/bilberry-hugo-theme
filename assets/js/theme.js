@@ -13,10 +13,10 @@ require('moment/min/locales.min')
 
 // Add ClipboardJs to enable copy button functionality
 new ClipboardJs('.copy-button', {
-    target: function(trigger) {
+    target: function (trigger) {
         return trigger.previousElementSibling
     },
-}).on('success', function(e) {
+}).on('success', function (e) {
     e.clearSelection()
 })
 
@@ -69,7 +69,7 @@ function updateTemps() {
     }
 
     // Process each figure
-    $('.temperature-reading').each(function() {
+    $('.temperature-reading').each(function () {
         var tempC = parseFloat(this.getAttribute('data-temp')) // ALWAYS in C
         if (tempInF === true) {
             // Only run conversion math if requested
@@ -84,9 +84,9 @@ function updateTemps() {
     })
 }
 
-$(document).ready(function() {
+$(document).ready(function () {
     // Add copy button and tooltip to each code-block
-    $('pre').each(function() {
+    $('pre').each(function () {
         $(this).append(
             '<button class="copy-button tooltip" title="Copied!"><i class="far fa-fw fa-copy"></i></button>',
         )
@@ -111,7 +111,7 @@ $(document).ready(function() {
     })
 
     // Nav-Toggle
-    $('.toggler').click(function() {
+    $('.toggler').click(function () {
         $('nav#topnav').slideToggle()
         $('#search').autocomplete('val', '')
     })
@@ -119,69 +119,69 @@ $(document).ready(function() {
     // Commento support to block search focus when hitting the S key
     blockSearchFocusCommento = false
 
-    $('#commento').focusin(function() {
+    $('#commento').focusin(function () {
         blockSearchFocusCommento = true
     })
 
-    $('#commento').focusout(function() {
+    $('#commento').focusout(function () {
         blockSearchFocusCommento = false
     })
 
     // Utterances support to block search focus when hitting the S key
     blockSearchFocusUtterances = false
 
-    $('#utterances').focusin(function() {
+    $('#utterances').focusin(function () {
         blockSearchFocusUtterances = true
     })
 
-    $('#utterances').focusout(function() {
+    $('#utterances').focusout(function () {
         blockSearchFocusUtterances = false
     })
 
     // Giscus support to block search focus when hitting the S key
     blockSearchFocusGiscus = false
 
-    $('#giscus').focusin(function() {
+    $('#giscus').focusin(function () {
         blockSearchFocusGiscus = true
     })
 
-    $('#giscus').focusout(function() {
+    $('#giscus').focusout(function () {
         blockSearchFocusGiscus = false
     })
 
     // Utterances support to block search focus when hitting the S key
     blockSearchFocusUtterances = false
 
-    $('#utterances').focusin(function() {
+    $('#utterances').focusin(function () {
         blockSearchFocusUtterances = true
     })
 
-    $('#utterances').focusout(function() {
+    $('#utterances').focusout(function () {
         blockSearchFocusUtterances = false
     })
 
     // Giscus support to block search focus when hitting the S key
     blockSearchFocusGiscus = false
 
-    $('#giscus').focusin(function() {
+    $('#giscus').focusin(function () {
         blockSearchFocusGiscus = true
     })
 
-    $('#giscus').focusout(function() {
+    $('#giscus').focusout(function () {
         blockSearchFocusGiscus = false
     })
 
     let doingSearch = false
 
-    $('#search').focusin(function() {
+    $('#search').focusin(function () {
         doingSearch = true
     })
-    $('#search').focusout(function() {
+    $('#search').focusout(function () {
         doingSearch = false
     })
 
     // Keyboard-Support
-    $(document).keyup(function(e) {
+    $(document).keyup(function (e) {
         if (e.keyCode === 27) {
             // Close topnav on escape
             if (!$('nav#topnav').hasClass('permanentTopNav'))
@@ -236,7 +236,7 @@ $(document).ready(function() {
     // Apparently someone thought that onclick() should have the ability
     // to be used to decide if a(n) (un)check action should actually be
     // valid or not. I was today years old when I learned this.
-    $('.content ul li input[type=checkbox]').each(function() {
+    $('.content ul li input[type=checkbox]').each(function () {
         $(this).attr('onclick', 'return false')
         $(this).prop('disabled', null)
     })
@@ -257,7 +257,7 @@ $(document).ready(function() {
             // Store if the element is expanding
             this.isExpanding = false
             // Detect user clicks on the summary element
-            this.summary.addEventListener('click', e => this.onClick(e))
+            this.summary.addEventListener('click', (e) => this.onClick(e))
         }
 
         onClick(e) {
@@ -322,8 +322,9 @@ $(document).ready(function() {
             // Get the current fixed height of the element
             const startHeight = `${this.el.offsetHeight}px`
             // Calculate the open height of the element (summary height + content height)
-            const endHeight = `${this.summary.offsetHeight +
-                this.content.offsetHeight}px`
+            const endHeight = `${
+                this.summary.offsetHeight + this.content.offsetHeight
+            }px`
 
             // If there is already an animation running
             if (this.animation) {
@@ -361,83 +362,9 @@ $(document).ready(function() {
         }
     }
 
-    document.querySelectorAll('details').forEach(el => {
+    document.querySelectorAll('details').forEach((el) => {
         new Accordion(el)
     })
-
-    /*
-    // Magnific Popup for images within articles to zoom them
-    // Rendered with Markdown
-    $('p img').magnificPopup({
-        type: "image",
-        image: {
-            verticalFit: true,
-            titleSrc: 'alt'
-        },
-        zoom: {
-            enabled: true
-        },
-        callbacks: {
-            // Get the src directly from the img-tag instead of an additional tag
-            elementParse: function(item) {
-              // Function will fire for each target element
-              // "item.el" is a target DOM element (if present)
-              // "item.src" is a source that you may modify
-
-              item.src = item.el.attr('src')
-            }
-        },
-        // https://github.com/dimsemenov/Magnific-Popup/pull/1017
-        // Enabled popup only when image size is greater than content area
-        disableOn: function(e) {
-            let img = e.target;
-            return img.naturalWidth > img.clientWidth;
-        }
-    });
-
-    // Magnific Popup for images within articles to zoom them
-    // Rendered with Asciidoc
-    $('.image-block>img').magnificPopup({
-        type: "image",
-        image: {
-            verticalFit: true,
-            titleSrc: function (item) {
-                return item.el.parent().find('figcaption').text();
-            }
-        },
-        zoom: {
-            enabled: true
-        },
-        callbacks: {
-            elementParse: function(item) {
-                item.src = item.el.attr('src')
-            }
-        },
-        // https://github.com/dimsemenov/Magnific-Popup/pull/1017
-        // Enabled popup only when image size is greater than content area
-        disableOn: function(e) {
-            let img = e.target;
-            return img.naturalWidth > img.clientWidth;
-        }
-    });
-
-
-    // Magnific Popup for images within articles to zoom them
-    // Rendered with Asciidoc
-    $('.image-block').magnificPopup({
-        type: "image",
-        delegate: "a",
-        image: {
-            titleSrc: function (item) {
-                return item.el.parent().find('figcaption').text();
-            },
-            verticalFit: true
-        },
-        zoom: {
-            enabled: true
-        }
-    });
-    */
 
     // Algolia-Search
     if ($('#activate-algolia-search').length) {
@@ -461,11 +388,11 @@ $(document).ready(function() {
             .autocomplete({ hint: false, autoselect: true, debug: false }, [
                 {
                     source: autocompleteSource,
-                    displayKey: function(suggestion) {
+                    displayKey: function (suggestion) {
                         return suggestion.title || suggestion.author
                     },
                     templates: {
-                        suggestion: function(suggestion) {
+                        suggestion: function (suggestion) {
                             return (
                                 "<span class='entry " +
                                 suggestion.type +
@@ -479,14 +406,14 @@ $(document).ready(function() {
                                 '</span>'
                             )
                         },
-                        empty: function() {
+                        empty: function () {
                             return (
                                 "<span class='empty'>" +
                                 $('#algolia-search-noSearchResults').val() +
                                 '</span>'
                             )
                         },
-                        footer: function() {
+                        footer: function () {
                             return (
                                 '<div class="branding">Powered by <img src="' +
                                 $('meta[name=siteBaseUrl]').attr('content') +
@@ -496,10 +423,10 @@ $(document).ready(function() {
                     },
                 },
             ])
-            .on('autocomplete:selected', function(event, suggestion, dataset) {
+            .on('autocomplete:selected', function (event, suggestion, dataset) {
                 window.location = suggestion.url
             })
-            .keypress(function(event, suggestion) {
+            .keypress(function (event, suggestion) {
                 if (event.which == 13) {
                     window.location = suggestion.url
                 }
@@ -509,13 +436,13 @@ $(document).ready(function() {
     // MomentJS
     language = $('html').attr('lang')
     moment.locale(language)
-    $('.moment').each(function() {
+    $('.moment').each(function () {
         date = $(this).text()
         $(this).text(moment(date).format('LL'))
     })
 
     // Mathjax No-JS
-    $('.math-container').each(function() {
+    $('.math-container').each(function () {
         this.innerHTML = this.getAttribute('data-mathjax')
     })
 
@@ -531,7 +458,7 @@ hljs.highlightAll()
 
 // Do tagline fetch
 let xmlHttp = new XMLHttpRequest()
-xmlHttp.onreadystatechange = function() {
+xmlHttp.onreadystatechange = function () {
     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
         taglines = xmlHttp.responseText.split('\n')
         setTagline()
