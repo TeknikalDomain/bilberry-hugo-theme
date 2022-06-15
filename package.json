@@ -5,8 +5,8 @@
   "dependencies": {
     "clipboard": "^2.0.8",
     "js-sha256": "^0.9.0",
-    "laravel-mix": "^5.0.9",
     "lazysizes": "^5.3.2",
+    "laravel-mix": "^6.0.43",
     "normalize.css": "^8.0.1",
     "tooltipster": "^4.2.8"
   },
@@ -17,22 +17,22 @@
     "cross-env": "^6.0.3",
     "flexslider": "^2.7.2",
     "highlight.js": "^10.7.3",
-    "instantsearch.js": "^3.7.0",
     "jquery": "^3.6.0",
-    "moment": "^2.29.1",
     "resolve-url-loader": "^3.1.4",
     "sass": "^1.47.0",
+    "instantsearch.js": "^4.39.1",
+    "moment": "^2.29.2",
     "sass-loader": "^8.0.2",
     "skeleton-css": "^2.0.4",
     "vue-template-compiler": "^2.6.14"
   },
   "scripts": {
     "dev": "npm run development",
-    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
     "watch": "npm run development -- --watch",
     "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
     "prod": "npm run production",
-    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+    "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
     "form": "npm run format",
     "format": "prettier --write assets/js/*.js"
   },

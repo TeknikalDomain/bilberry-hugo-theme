@@ -3,11 +3,13 @@
 </a>
 
 <article class="gallery">
+    {{ $img_alt := .ctx.Title }}
+
     {{ if and (isset .ctx.Params "gallery") (ne .ctx.Params.gallery "") }}
         <div class="flexslider">
             <ul class="slides">
                 {{ range .ctx.Params.gallery }}
-                    <li><img src="{{ . | relURL }}" /></li>
+                    <li><img alt="{{ $img_alt }}" src="{{ . | relURL }}" /></li>
                 {{ end }}
             </ul>
         </div>

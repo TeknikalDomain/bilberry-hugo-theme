@@ -94,7 +94,7 @@ article {
         content: "";
         display: block;
         border: 10px solid transparent;
-        border-right-color: #FFF;
+        border-right-color: #fff;
         position: absolute;
         top: 50px;
         left: -20px;
@@ -117,6 +117,12 @@ article {
 
             a {
                 font-style: normal;
+                color: inherit;
+
+                &:hover {
+                    color: $highlight-color;
+                    text-decoration: none;
+                }
             }
         }
 
@@ -137,8 +143,7 @@ article {
         }
 
         h6 {
-            font-size: 1.1em;
-            text-transform: uppercase;
+            font-size: 1.2em;
             font-weight: bold;
         }
 
@@ -157,7 +162,13 @@ article {
             margin-bottom: 4.5%;
 
             a {
+                color: inherit;
                 font-style: normal;
+
+                &:hover {
+                    color: $highlight-color;
+                    text-decoration: underline;
+                }
             }
 
             span {
@@ -178,20 +189,24 @@ article {
         }
 
         a {
-            font-style: italic;
+            font-style: normal;
+            color: $highlight-color;
+
+            &:hover {
+                text-decoration: underline;
+            }
         }
 
         a.more {
             display: block;
-            margin: 2.5rem 0;
-            margin-bottom: 1rem;
+            margin: 2.5rem 0 1rem;
             color: $highlight-color;
             font-size: 1.125em;
             text-decoration: none;
             font-style: normal;
 
             &:hover {
-                color: $continue-reading-hover-color;
+                text-decoration: underline;
             }
         }
 
@@ -238,6 +253,7 @@ article {
                     &:hover {
                         left: 10px;
                         color: $base-color;
+                        text-decoration: none;
                     }
                 }
             }
@@ -249,7 +265,7 @@ article {
             margin: 1.5em 0;
             padding: 2em;
             border-left: 0.5em solid #ededed;
-            font-size: 1.1em;
+            font-size: 1.05em;
 
             cite {
                 text-transform: uppercase;
@@ -476,7 +492,7 @@ article {
             padding: 5.5%;
             margin: 0;
             text-align: center;
-            color: #FFF;
+            color: #fff;
             background: none;
             font-size: 1.2em;
             position: relative;
@@ -484,7 +500,7 @@ article {
 
             p {
                 line-height: 170%;
-                font-size: 1.10em;
+                font-size: 1.1em;
             }
 
             cite {
@@ -524,7 +540,8 @@ article {
     }
 
     // Video
-    &.video, &.article {
+    &.video,
+    &.article {
         .responsive-video {
             position: relative;
             /* 16:9 ratio*/
@@ -539,14 +556,18 @@ article {
                 left: 0;
                 width: 100%;
                 height: 100%;
+                border: 0;
             }
         }
     }
 
     // Audio
-    &.audio, &.article {
-        .responsive-audio iframe, .responsive-audio audio {
+    &.audio,
+    &.article {
+        .responsive-audio iframe,
+        .responsive-audio audio {
             width: 100%;
+            border: 0;
         }
     }
 
@@ -565,7 +586,7 @@ article {
 
             &:after {
                 border-right-color: $highlight-color;
-                transition: all 0.3s ease-in-out
+                transition: all 0.3s ease-in-out;
             }
         }
 
@@ -605,7 +626,7 @@ article {
     }
 }
 
-#comments-container  {
+#comments-container {
     margin-left: 100px;
     padding-bottom: 1.2em;
 }

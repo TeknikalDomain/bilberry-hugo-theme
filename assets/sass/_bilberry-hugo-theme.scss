@@ -33,13 +33,15 @@
 
     pre {
         position: relative;
+        background: transparent !important;
 
         code {
-            padding: 0.75em;
+            padding: 1.0em;
             font-size: 0.9em;
             white-space: pre;
             overflow-x: auto;
             background: inherit;
+            border-radius: 4px;
         }
 
         .copy-button {
@@ -60,7 +62,7 @@
     }
 
     code {
-        font-family: 'Fira Code', monospace;
+        font-family: "Fira Code", monospace;
         border: 0;
         margin: 0;
         white-space: normal;
@@ -78,7 +80,6 @@
         font-size: 15pt;
     }
 
-
     .container {
         width: $site-width;
         max-width: 100%;
@@ -95,18 +96,15 @@
     }
 
     .flexslider {
-
         ol,
         ul {
             list-style: none;
         }
     }
 
-
     .fa-youtube-adblock-proof:before {
         content: "\F167";
     }
-
 
     @import "topnav";
 
