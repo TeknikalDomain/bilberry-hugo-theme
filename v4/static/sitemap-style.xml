@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsl:stylesheet version="3.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:sitemap="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <xsl:param name="loc" select="/sitemap:urlset/sitemap:url/sitemap:loc"/>
+    <xsl:template match="/">
+        <html class="js" lang="en">
+            <head>
+                <meta charset="utf8" />
+                <meta name="viewport" content="width=device-width, initial-scale=1" />
+                <meta name="siteBaseUrl" content="https://teknikaldomain.me/" />
+                <title>Sitemap for Teknikal's_Domain</title>
+                <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+                <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+                <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
+                <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+                <link rel="manifest" href="/site.webmanifest" />
+                <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1da82d" />
+                <meta name="msapplication-TileColor" content="#1da82d" />
+                <meta name="theme-color" content="#1da82d" />
+                <script src="/modernizr-simple.js"></script>
+                <link rel="stylesheet" href="https://teknikaldomain.me/theme.css" />
+                <link rel="stylesheet" href="https://teknikaldomain.me/littlefoot.css" />
+            </head>
+            <body class="bilberry-hugo-theme">
+                <nav id="topnav">
+                    <div class="container">
+                        <ul class="topnav">
+			    <li><a href="https://teknikaldomain.me/page/contact/">Contact</a></li>
+                            <li><a href="https://teknikaldomain.me/page/errata/">Errata</a></li>
+                            <li><a href="/index.xml" target="_blank">RSS</a></li>
+                            <li><a href="https://teknikaldomain.me/page/donations-box/">Donations Box</a></li>
+                            <li><a href="/video" target="">My Videos</a></li>
+                        </ul>
+                        <div id="search-box" class="search">
+                            <i class="fas fa-search"></i>
+                            <input id="search" type="text" placeholder="Search ..." />
+                        </div>
+                    </div>
+                </nav>
+                <header>
+                    <div class="container">
+                        <div class="logo">
+                            <a href="/" class="logo">
+                                <img src="/minimal.png" alt="" />
+                                <span class="overlay"><i class="fa fa-home"></i></span>
+                            </a>
+                        </div>
+                        <div class="titles">
+                            <h3 class="title">
+                                <a href="/">
+                                    Tek&#39;s Domain
+                                </a>
+                            </h3>
+                            <span class="subtitle" onclick="setTagline()"></span>
+                        </div>
+                        <div class="toggler">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                </header>
+                <div class="main container">
+                    <div class="article-wrapper u-cf single">
+                        <a class="bubble" href="https://teknikaldomain.me/sitemap.xml">
+                            <i class="fa fa-fw fa-list"></i>
+                        </a>
+                        <article class="default article">
+                            <div class="content">
+                                <h1 class="article-title">
+                                    <a href="https://teknikaldomain.me/sitemap.xml">
+                                        List of URLs for teknikaldomain.me
+                                    </a>
+                                </h1>
+                                <ul>
+                                    <xsl:for-each select="sitemap:urlset/sitemap:url">
+                                        <li><code><xsl:value-of select="sitemap:loc" /></code>, Last updated on <xsl:value-of select="sitemap:lastmod" />.</li>
+                                    </xsl:for-each>
+                                </ul>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+                <div class="credits">
+                    <div class="container">
+                        <div class="copyrigt">
+                            <a href="https://github.com/TeknikalDomain" taget="_blank">
+                                © 2021 Teknikal_Domain
+                            </a>
+                        </div>
+                        <script type='text/javascript' src='https://ko-fi.com/widgets/widget_2.js'></script><script type='text/javascript'>kofiwidget2.init('Support Me on Ko-fi', '#0f5417', 'I2I613SPZ');kofiwidget2.draw();</script>
+                        <div class="author">
+                            <a href="https://github.com/TeknikalDomain/bilberry-hugo-theme" target="_blank">
+                                Modified fork of the Bilberry Hugo Theme
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <script type="text/javascript" src="https://teknikaldomain.me/theme.js"></script>
+                <script src="https://teknikaldomain.me/subtitle_tagline.js" type="application/javascript"></script>
+                <div id="activate-algolia-search" class="hidden">
+                    <input type="hidden" id="algolia-search-appId" value="A1C3X733E3" />
+                    <input type="hidden" id="algolia-search-apiKey" value="b443fb2d9fd18b77175772e55e98d09a" />
+                    <input type="hidden" id="algolia-search-indexName" value="blog_index" />
+                    <input type="hidden" id="algolia-search-noSearchResults" value="Nothing found." />
+                </div>
+            </body>
+        </html>
+    </xsl:template>
+</xsl:stylesheet>

@@ -5,7 +5,7 @@ draft: true
 
 categories: []
 tags: []
-author: ""
+author: "Teknikal_Domain"
 
 # Set your video id for
 youtube: ""         # https://www.youtube.com/watch?v=M7IjJiZUutk -> "M7IjJiZUutk"

@@ -1,4 +1,17 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+{{- $pctx := . -}}
+{{- if .IsHome -}}{{ $pctx = .Site }}{{- end -}}
+{{- $pages := slice -}}
+{{- if or $.IsHome $.IsSection -}}
+{{- $pages = $pctx.RegularPages -}}
+{{- else -}}
+{{- $pages = $pctx.Pages -}}
+{{- end -}}
+{{- $limit := .Site.Config.Services.RSS.Limit -}}
+{{- if ge $limit 1 -}}
+{{- $pages = $pages | first $limit -}}
+{{- end -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:tkd_mstdn="https://tekdmn.me/page/rss-ns/tkd-mstdn#">
   <channel>
     <title>{{ if eq  .Title  .Site.Title }}{{ .Site.Title }}{{ else }}{{ with .Title }}{{.}} on {{ end }}{{ .Site.Title }}{{ end }}</title>
     <link>{{ .Permalink }}</link>
@@ -12,14 +25,31 @@
     {{ with .OutputFormats.Get "RSS" }}
         {{ printf "<atom:link href=%q rel=\"self\" type=%q />" .Permalink .MediaType | safeHTML }}
     {{ end }}
-    {{ range (where .Site.RegularPages "Type" "not in" (slice "page" "archive" )) }}
+    {{ range (where $pages "Type" "not in" (slice "page" "archive" )) }}
     <item>
       <title>{{ .Title }}</title>
       <link>{{ .Permalink }}</link>
       <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" | safeHTML }}</pubDate>
       {{ with .Site.Author.email }}<author>{{.}}{{ with $.Site.Author.name }} ({{.}}){{end}}</author>{{end}}
-      <guid>{{ .Permalink }}</guid>
-      <description>{{ .Summary | html }}</description>
+      <guid isPermaLink="false">{{ sha256 .Content }}</guid>
+      {{ if (.Resources.GetMatch "featuredImage.*") }}
+      {{ $resLink := path.Join "/content" .RelPermalink (.Resources.GetMatch "featuredImage.png") }}
+      {{ $stat := os.Stat $resLink }}
+      <enclosure url="{{ .Permalink }}featuredImage.png" length="{{ $stat.Size }}" type="image/png" />
+      {{ end }}
+      <description>
+        {{ if eq .Params.imageSlider true }}
+        <p><i>Note: The gallery images for this post cannot be displayed (easily) on an RSS feed. Please visit the real post URL to view them.</i></p>
+        {{ end }}
+        {{ with .Params.peertube }}
+        <p>Video link: <a href="{{ . }}">{{ . }}</a>.</p>
+        {{ end }}
+        {{ replace .Content "data-src" "src" | html }}
+      </description>
+      {{ with .Params.hashtags }}<tkd_mstdn:hashtags>{{ range . }}#{{ . }} {{ end }}</tkd_mstdn:hashtags>{{end}}
+      {{ if .Params.mastodon }}<tkd_mstdn:tootAllowed/>{{ else }}<tkd_mstdn:tootForbidden/>{{ end }}
+      <tkd_mstdn:summary>{{ if eq .Params.description "summary" }}{{ .Summary | htmlUnescape | plainify | chomp }}{{ else }}{{ .Params.description }}{{ end }}</tkd_mstdn:summary>
+      <tkd_mstdn:altLink>https://tekdmn.me{{ .RelPermalink }}</tkd_mstdn:altLink>
     </item>
     {{ end }}
   </channel>

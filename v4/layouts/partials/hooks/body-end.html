@@ -1,4 +1,15 @@
 <!--
     1. Copy this file into your site root's "layouts/partials/hooks" folder
     2. Add the necessary code to integrate with third-party services or to customize your site further
--->
+  -->
+
+{{ if eq .Params.googleCharts true }}
+    <script data-cfasync="false" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script async data-cfasync="false" src="chart_data.js"></script>
+{{ end }}
+
+{{ if ( .Params.littlefoot | default true ) }}
+    <script type="application/javascript">
+        littlefoot.littlefoot()  // Pass any littlefoot settings here.
+    </script>
+{{ end }}

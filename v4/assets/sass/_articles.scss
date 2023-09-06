@@ -17,6 +17,79 @@ article {
         left: -22px;
     }
 
+    div.article-extras {
+        border-bottom: 3px double $meta-border-color;
+        padding-bottom: 2.5%;
+        margin-bottom: 4.5%;
+
+        div.narration-container table {
+            margin-right: 0px;
+            margin-left: 0px;
+            margin-bottom: 0px;
+
+            th, td {
+                border: 0px;
+            }
+        }
+
+        div.chips {
+            display: block;
+
+            span.simple-chip {
+                border: 2px $base-color solid;
+                border-radius: 50px;
+                overflow: hidden;
+                display: inline-flex;
+                padding: 2px 5px 0 5px;
+                font-family: $headline-font;
+                font-weight: bold;
+                font-style: normal;
+                color: $page-background-color;
+                background-color: $base-color;
+            }
+
+            span#rework-chip.simple-chip {
+                border-color: red;
+                background-color: red;
+            }
+
+            span#outdated-chip.simple-chip {
+                border-color: orange;
+                background-color: orange;
+                color: $text-color;
+            }
+
+            span#improved-chip.simple-chip {
+                border-color: #0ee;
+                background-color: #0ee;
+                color: $text-color;
+            }
+
+            span.chip {
+                border: 2px $base-color solid;
+                border-radius: 50px;
+                overflow: hidden;
+                display: inline-flex;
+                font-style: normal;
+
+                span.chip-left {
+                    background-color: $base-color;
+                    color: $page-background-color;
+                    overflow: hidden;
+                    padding: 2px 4px 0 5px;
+                    font-family: $headline-font;
+                    font-weight: bold;
+                }
+
+                span.chip-right {
+                    padding: 2px 5px 0 4px;
+                    font-family: $headline-font;
+                }
+
+            }
+        }
+    }
+
     &:after {
         content: "";
         display: block;
@@ -36,6 +109,9 @@ article {
     }
 
     .content {
+
+	--popover-font-family: "Open Sans", sans-serif;
+	
         padding: 2em;
 
         h1 {
@@ -72,6 +148,10 @@ article {
         h6 {
             font-size: 1.2em;
             font-weight: bold;
+        }
+
+        .meta.with-extras {
+            margin-bottom: 2rem;
         }
 
         .meta {
@@ -145,6 +225,14 @@ article {
             }
         }
 
+	div.highlight {
+	    overflow-x: hidden;
+
+	    div {
+		overflow-x: auto;
+	    }
+	}
+
         .archive-list {
             ul {
                 list-style: none;
@@ -197,14 +285,61 @@ article {
             }
         }
 
+        details {
+
+            div {
+                padding: 0 5px;
+                border: 2px solid $base-color;
+                border-top: none;
+                color: $text-color;
+                margin: 0 10px;
+                border-radius: 0 0 5px 5px;
+
+                p {
+                    margin: 0;
+                    padding-bottom: 10px;
+                    &:last-child {
+                        padding: 0;
+                    }
+                }
+            }
+
+            summary {
+                padding: 5px;
+                border: 2px solid transparent;
+                background-color: $base-color;
+                border-radius: 10px;
+            }
+
+            box-sizing: border-box;
+            color: #f7f7f7;
+        }
+
         img, figure {
             max-width: 100%;
             display: block;
             margin: 0 auto;
         }
 
-        video {
-            max-width: 100%;
+        table {
+            margin-left: auto;
+            margin-right: auto;
+
+            th {
+                text-align: center;
+            }
+
+            td[align="right"] {
+                text-align: right;
+            }
+
+            td[align="center"] {
+                text-align: center;
+            }
+
+            td[align="left"] {
+                text-align: left;
+            }
         }
 
         #TableOfContents {
@@ -240,6 +375,14 @@ article {
                 }
             }
         }
+
+	.temperature-reading {
+	    border-bottom: 2px dotted;
+	}
+    }
+
+    .highlight {
+        margin: 1em 0;
     }
 
     .footer {

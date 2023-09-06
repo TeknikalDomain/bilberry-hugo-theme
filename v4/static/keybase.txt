@@ -1,0 +1,50 @@
+I hereby claim:
+
+  * I am an admin of https://teknikaldomain.me
+  * I am teknikal_domain (https://keybase.io/teknikal_domain) on keybase.
+  * I have a public key ASDHQ64pKBjqFSgBisJKLD2963RGqJ4Mt-9YfjDLa2puIQo
+
+To do so, I am signing this object:
+
+{
+  "body": {
+    "key": {
+      "eldest_kid": "0120c743ae292818ea1528018ac24a2c3dbdeb7446a89e0cb7ef587e30cb6b6a6e210a",
+      "host": "keybase.io",
+      "kid": "0120c743ae292818ea1528018ac24a2c3dbdeb7446a89e0cb7ef587e30cb6b6a6e210a",
+      "uid": "662db1d8e71a18ffcf62e9941939ce19",
+      "username": "teknikal_domain"
+    },
+    "merkle_root": {
+      "ctime": 1585034192,
+      "hash": "88b108d99cfacd55a8d478ec219f2fab0fcbe21f8071b83b57ed6de7b03f33be41db63335677a34ed7bfb49636d3be8051679f8d03f8fb31ba01759fa5fe6016",
+      "hash_meta": "ee6c252eaf8ada677ff017770dfe55c64634affd56c2d988acd327fb75866ead",
+      "seqno": 15568806
+    },
+    "service": {
+      "entropy": "BPTXK0mU+LKjMPLMby3V44AV",
+      "hostname": "teknikaldomain.me",
+      "protocol": "https:"
+    },
+    "type": "web_service_binding",
+    "version": 2
+  },
+  "client": {
+    "name": "keybase.io go client",
+    "version": "5.3.0"
+  },
+  "ctime": 1585034218,
+  "expire_in": 504576000,
+  "prev": "ca16ef6b44220a27fb6219a426d12caba970b682f8be1e294e204b5073f43a16",
+  "seqno": 31,
+  "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgx0OuKSgY6hUoAYrCSiw9vet0RqieDLfvWH4wy2tqbiEKp3BheWxvYWTESpcCH8Qgyhbva0QiCif7YhmkJtEsq6lwtoL4vh4pTiBLUHP0OhbEIBnp8HGPwzyv9yuJEXzN6qACKqjZjj0kHc2+eFbI69huAgHCo3NpZ8RAfy1Pp4Su3oJycSFR+WezjvyVe8DxiA1zxgrTOrix3BKYD1Jch5NefNK14kUnrScubiVRo/nql2a04EWWB5DCAahzaWdfdHlwZSCkaGFzaIKkdHlwZQildmFsdWXEIBFjzFYl1sSQOe9BbJAaT8I56T5gVA70mPHrm/KLxoxAo3RhZ80CAqd2ZXJzaW9uAQ==
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/teknikal_domain

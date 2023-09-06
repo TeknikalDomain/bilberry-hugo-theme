@@ -1,0 +1,10 @@
+User-agent: chatgpt
+Disallow: /
+
+User-agent: GPTBot
+Disallow: /
+
+User-agent: *
+Disallow: /page/
+Disallow: /cdn/cgi
+Sitemap: https://teknikaldomain.me/sitemap.xml

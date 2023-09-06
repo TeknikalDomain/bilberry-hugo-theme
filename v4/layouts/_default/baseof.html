@@ -41,12 +41,6 @@
 {{- end -}}
 {{- end -}}
 
-{{- if eq .Site.Title .Title -}}
-    {{ .Scratch.Set "title" (.Site.Params.subtitle) }}
-{{- else -}}
-    {{ .Scratch.Set "title" (.Title) }}
-{{- end -}}
-
 <html itemscope itemtype="https://schema.org/WebPage" class="no-js" lang="{{ .Site.Language.Lang }}">
 
 <head>
@@ -59,8 +53,8 @@
     {{ hugo.Generator }}
     <title>
         {{ block "title" . }}
-           {{ if .Scratch.Get "title" }}
-               {{ .Scratch.Get "title" }} &vert; {{ .Site.Title }}
+           {{ if ne .Site.Title .Title }}
+               {{ .Title }} &vert; {{ .Site.Title }}
            {{ else }}
                {{ .Site.Title }}
            {{ end }}

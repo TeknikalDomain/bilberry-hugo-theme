@@ -19,20 +19,18 @@ new ClipboardJs('.copy-button', {
 
 // Subtitle taglines
 let taglines = []
-let rawsub = ''
 let subtitle = $('.subtitle')[0]
 
 function setTagline() {
     let thisTagline = taglines[Math.floor(Math.random() * taglines.length)]
 
-    if (rawsub == '') {
-        rawsub = subtitle.innerHTML
-    }
-
-    subtitle.innerHTML = rawsub
-
     if (thisTagline == '') {
-        return
+        // Just try again
+	// There's no way someone will get unlucky enough for this to recurse to the point of
+	// a browser complaining, right?
+	//
+	// ...right?
+	setTagLine()
     }
 
     if (thisTagline == '<COUNT>') {
@@ -46,7 +44,7 @@ function setTagline() {
             '% chance of getting it each load?'
     }
 
-    subtitle.innerHTML = rawsub + ' | ' + thisTagline
+    subtitle.innerHTML = thisTagline
 }
 
 // Custom temperature display

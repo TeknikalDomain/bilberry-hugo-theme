@@ -5,7 +5,7 @@ draft: true
 
 categories: []
 tags: []
-author: ""
+author: "Teknikal_Domain"
 
 # Set your audio id/url for
 spotify: ""     # https://open.spotify.com/track/3W2lz1sg6m4sEzjmoTjmdE?si=0659fd12179840dd --> 3W2lz1sg6m4sEzjmoTjmdE

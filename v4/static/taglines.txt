@@ -41,7 +41,6 @@ My skils with new languages are a little <em>Rust</em>y... Don't worry, I'll <em
 I like how I have more dead drives than I do working ones
 Dead drives? More like <em>target practice.</em> If I can't have my old data, nobody can!
 Fun fact: drives with green labels <strong>suck.</strong> See also: WD Green, <em>seagate.</em>
-Sneak preview: There's a <em>new Hackintosh guide</em> coming up soon (OC this time)
 WHY is LDAP so difficult?!
 No wonder Samba barely works... it provides <em>Windows</em> services, after all
 Scheduled posts drop at 8 AM, eastern time

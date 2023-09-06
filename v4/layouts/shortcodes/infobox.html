@@ -1,0 +1,8 @@
+<p>
+    <details {{ if eq (.Get 1) "true" }}open{{ end }}>
+        <summary{{ with (.Get 2) }} style="background-color: {{.}};"{{ end }}>{{ .Get 0 }}</summary>
+        <div{{ with (.Get 2) }} style="border-color: {{.}};"{{ end }}>
+        {{ .Inner | markdownify }}
+        </div>
+    </details>
+</p>

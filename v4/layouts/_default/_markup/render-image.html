@@ -1,12 +1,17 @@
+{{ $imgFragment := (urls.Parse .Destination).Fragment }}
+{{ $imgSizeFragment := index (split $imgFragment ".") 0 }}
+{{ $imgGallery := index (split $imgFragment ".") 1 }}
+{{ $imgSizeX := index (split $imgSizeFragment "x") 0 }}
+{{ $imgSizeY := index (split $imgSizeFragment "x") 1 }}
 {{ if .Title }}
 <figure>
-    <a href="{{ .Destination | safeURL }}" data-dimbox data-dimbox-caption="{{ .Text }}">
+    <a href="{{ .Destination | safeURL }}" data-dimbox{{ with $imgGallery }}="{{.}}"{{ end }} data-dimbox-caption="{{ .Text }}" data-dimbox-type="image">
         <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" />
     </a>
     <figcaption>{{ .Title }}</figcaption>
 </figure>
 {{ else }}
-<a href="{{ .Destination | safeURL }}" data-dimbox data-dimbox-caption="{{ .Text }}">
+<a href="{{ .Destination | safeURL }}" data-dimbox{{ with $imgGallery }}="{{.}}"{{ end }} data-dimbox-caption="{{ .Text }}" data-dimbox-type="image">
     <img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" />
 </a>
 {{ end }}
