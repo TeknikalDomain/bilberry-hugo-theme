@@ -1,8 +1,4 @@
-# hugo
-.hugo_build.lock
-
-mix-manifest.json
-# Created by https://www.gitignore.io/api/node,sass,linux,macos,sublimetext
+# Created by https://www.gitignore.io/api/node,sass,linux,macos,sublimetext,hugo
 
 ### Linux ###
 *~
@@ -143,16 +139,36 @@ bh_unicode_properties.cache
 # https://packagecontrol.io/packages/sublime-github
 GitHub.sublime-settings
 
-# End of https://www.gitignore.io/api/node,sass,linux,macos,sublimetext
+### Hugo ###
+# Generated files by hugo
+**/public/
+**/resources/_gen/
+**/assets/jsconfig.json
+**/hugo_stats.json
 
+# Executable may be added to repository
+**/hugo.exe
+**/hugo.darwin
+**/hugo.linux
+
+# Temporary lock file while building
+**/.hugo_build.lock
+
+# End of https://www.gitignore.io/api/node,sass,linux,macos,sublimetext,hugo
+
+# v3
 testing/testing-example-site/public
-testing/testing-example-site/public0
-testing/testing-example-site/public1
-testing/testing-example-site/public2
-testing/testing-example-site/public3
-testing/testing-example-site/public4
+testing/testing-example-site/public*
 testing/testing-example-site/resources
 testing/testing-example-site/themes
+mix-manifest.json
+
+# v4
+**/tests/exampleSite/public
+**/tests/exampleSite/public*
+**/tests/exampleSite/resources
+**/tests/exampleSite/themes
+**/tests/local
 
 # IntelliJ IDEA
 *.iml

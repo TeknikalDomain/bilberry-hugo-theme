@@ -86,7 +86,7 @@
 
     <script src="{{ "modernizr-simple.js" | relURL }}"></script>
 
-    {{ if .RelPermalink }}
+    {{ with .OutputFormats.Get "RSS" }}
     <link href="/index.xml" rel="alternate" type="application/rss+xml" title="{{ .Site.Title }}" />
     <link href="/index.xml" rel="feed" type="application/rss+xml" title="{{ .Site.Title }}" />
     {{ end }}
@@ -106,9 +106,12 @@
             <link rel="stylesheet" href="{{ . | absURL }}">
         {{ end }}
     {{ end }}
+
+    {{ partial "hooks/head-end.html" . }}
 </head>
 
 <body class="bilberry-hugo-theme">
+    {{ partial "hooks/body-start.html" . }}
 
     {{ partial "topnav.html" . }}
 
@@ -126,7 +129,17 @@
     {{ partial "mathjax.html" . }}
     {{ end }}
 
-    <script type="text/javascript" src="{{ "theme.js" | absURL }}"></script>
+    {{- $noMoment    := not (.Site.Params.enableMomentJs    | default true) -}}
+    {{- $noHighlight := not (.Site.Params.enableHighlightJs | default true) -}}
+    {{ if and $noMoment $noHighlight }}
+    <script src="{{ "theme-exclude-moment-and-highlight.js" | absURL }}"></script>
+    {{ else if $noMoment }}
+    <script src="{{ "theme-exclude-moment.js" | absURL }}"></script>
+    {{ else if $noHighlight }}
+    <script src="{{ "theme-exclude-highlight.js" | absURL }}"></script>
+    {{ else }}
+    <script src="{{ "theme.js" | absURL }}"></script>
+    {{ end }}
 
     {{ if isset .Site.Params "js_modules" }}
     {{ range .Site.Params.js_modules }}
@@ -142,6 +155,7 @@
     {{ partial "algolia-search.html" . }}
     {{ end }}
 
+    {{/* Need to be moved to body end hooks, SoonTM */}}
     {{ if eq .Params.googleCharts true }}
     <script data-cfasync="false" src="https://www.gstatic.com/charts/loader.js"></script>
     <script async data-cfasync="false" src="chart_data.js"></script>
@@ -152,6 +166,7 @@
         littlefoot.littlefoot()  // Pass any littlefoot settings here.
     </script>
     {{ end }}
-</body>
 
+    {{ partial "hooks/body-end.html" . }}
+</body>
 </html>

@@ -6,7 +6,7 @@
         <div class="recent-posts">
             <strong>{{ i18n "latestPosts" }}</strong>
             <ul>
-                {{ $dontRender :=  (slice "page" "quote" "link" "status") }}
+                {{ $dontRender :=  (slice "page" "quote" "link" "status" "archive") }}
                 {{ range (first (.Site.Params.amountLatestPostsInFooter | default 7) (where (where .Site.Pages.ByPublishDate.Reverse ".Kind" "page") ".Type" "not in" $dontRender )) }}
                     <li>
                         <a href="{{ .Permalink }}">{{ .Title }}</a>
@@ -18,12 +18,16 @@
 
         {{ if and .Site.Taxonomies.categories (gt ( .Site.Params.amountCategoriesInFooter | default 7 ) 0 ) }}
         <div class="categories">
-            <a href="{{ "/categories/" | relLangURL }}"><strong>{{ i18n "categories" }}</strong></a>
+            {{ with .Site.GetPage "/categories" }}
+            <a href="{{ .Permalink }}"><strong>{{ i18n "categories" }}</strong></a>
+            {{ end }}
+
             <ul>
                 {{ range $order, $taxonomy := (first ( .Site.Params.amountCategoriesInFooter | default 7 ) .Site.Taxonomies.categories.ByCount) }}
                 <li>
-                    <a href="{{ (print "/categories/" ($taxonomy.Name | urlize)) | relLangURL }}">{{ $taxonomy.Name | humanize }}
-                        ({{ $taxonomy.Count }})</a>
+                {{ with $.Site.GetPage (printf "/categories/%s" $taxonomy.Name) }}
+                    <a href="{{ .Permalink }}">{{ .Title }} ({{ $taxonomy.Count }})</a>
+                {{ end }}
                 </li>
                 {{ end }}
             </ul>
@@ -48,7 +52,6 @@
             {{ if .Site.Params.showSocialMedia | default true }}
             <div class="external-profiles">
                 <strong>{{ i18n "socialMedia" }}</strong>
-
                 {{ range .Site.Params.socialMediaLinks }}
                 {{ if .mastodon }}
                 <a rel="me" href="{{ .link }}" target="_blank"><i class="{{ .icon }}"></i></a>
@@ -59,23 +62,31 @@
             </div>
             {{ end }}
 
-            {{ if and (.Site.Params.showFooterLanguageChooser | default true) (gt .Site.Languages 1) }}
-            {{- $.Scratch.Set "language" .Language -}}
-            <div class="languages">
-                <strong>{{ i18n "otherLanguages" }}</strong>
-                {{ range $.Site.Home.AllTranslations }}
-                {{ if eq ($.Scratch.Get "language") .Language }}
-                <a href="{{ .Permalink }}" class="active">{{ .Language }}</a>
-                {{ else }}
-                <a href="{{ .Permalink }}">{{ .Language }}</a>
-                {{ end }}
-                {{ end }}
-            </div>
+            {{ if and (gt .Site.Languages 1) (.Site.Params.showFooterLanguageChooser | default true) }}
+                {{- $language := .Language -}}
+                {{- $pages := .Page.AllTranslations -}}
+                <div class="languages">
+                    <strong>{{ i18n "otherLanguages" }}</strong>
+                    {{ range $.Site.Home.AllTranslations }}
+                        {{ $url := .RelPermalink }}
+                        {{ range where $pages "Lang" .Language.Lang }}
+                            {{ $url = .RelPermalink }}
+                        {{ end }}
+
+                        {{ if eq $language .Language }}
+                            <a href="{{ $url }}" class="active">{{ .Language }}</a>
+                        {{ else }}
+                            <a href="{{ $url }}">{{ .Language }}</a>
+                        {{ end }}
+                    {{ end }}
+                </div>
             {{ end }}
 
             {{ if .Site.Params.showArchive | default true }}
             <div class="archive">
-                <a href="{{ "/archive/" | relLangURL }}"><strong>{{ i18n "archive" }}</strong></a>
+                {{ with .Site.GetPage "/archive" }}
+                <a href="{{ .Permalink }}"><strong>{{ i18n "archive" }}</strong></a>
+                {{ end }}
             </div>
             {{ end }}
         </div>
@@ -90,6 +101,8 @@
                 &copy;
                 {{ if .Site.Params.copyrightUseCurrentYear }}
                 {{ now.Year }}
+                {{ else if gt now.Year (.Site.Params.copyrightYearOverride | default 2018) }}
+                {{ .Site.Params.copyrightYearOverride | default 2018 }} - {{ now.Year }}
                 {{ else }}
                 {{ .Site.Params.copyrightYearOverride | default 2018 }}
                 {{ end }}

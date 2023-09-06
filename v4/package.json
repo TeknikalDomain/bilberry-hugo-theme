@@ -1,0 +1,47 @@
+{
+  "name": "bilberry-hugo-theme",
+  "version": "3.0.0",
+  "description": "Bilberry Hugo theme",
+  "dependencies": {},
+  "devDependencies": {
+    "hugo-extended": "^0.109.0",
+    "clipboard": "^2.0.6",
+    "dimbox": "^1.0.2",
+    "normalize.css": "^8.0.1",
+    "tooltipster": "^4.2.8",
+    "@fortawesome/fontawesome-free": "^6.4.0",
+    "algoliasearch": "^3.35.1",
+    "autocomplete.js": "^0.37.1",
+    "cross-env": "^6.0.3",
+    "flexslider": "^2.7.2",
+    "instantsearch.js": "^4.39.1",
+    "jquery": "^3.5.1",
+    "moment": "^2.29.4",
+    "resolve-url-loader": "^3.1.5",
+    "sass": "^1.26.10",
+    "sass-loader": "^8.0.2",
+    "skeleton-css": "^2.0.4",
+    "vue-template-compiler": "^2.6.11"
+  },
+  "scripts": {
+    "update-deps": "scripts/update-node-deps.sh",
+    "build-example": "scripts/build-example-site.sh",
+    "serve-example": "scripts/serve-example-site.sh",
+    "stop-hugo": "killall hugo"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lednerb/bilberry-hugo-theme.git"
+  },
+  "keywords": [
+    "Bilberry",
+    "Hugo",
+    "Theme"
+  ],
+  "author": "@Lednerb",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Lednerb/bilberry-hugo-theme/issues"
+  },
+  "homepage": "https://github.com/Lednerb/bilberry-hugo-theme#readme"
+}
