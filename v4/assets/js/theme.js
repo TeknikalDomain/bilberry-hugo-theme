@@ -100,7 +100,7 @@ $(document).ready(function () {
 
     // Nav-Toggle
     $(".toggler").click(function () {
-        $("nav").slideToggle();
+        $("nav:not(#TableOfContents)").slideToggle();
         $("#search").autocomplete("val", "");
     });
 
