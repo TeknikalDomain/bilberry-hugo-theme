@@ -27,11 +27,11 @@
 
 {{ $js := $jsToConcat | resources.Concat "theme.js" }}
 
-{{ if or (.Site.IsServer) (eq hugo.Environment "development") }}
+{{ if or (hugo.IsServer) (eq hugo.Environment "development") }}
     <script src="{{ $js.Permalink }}"></script>
 {{ else }}
     {{ $js := $js | resources.Minify | resources.Fingerprint }}
-    <script src="{{ $js.Permalink }}" disabled-integrity="{{ $js.Data.Integrity }}"></script>
+    <script src="{{ $js.Permalink }}" integrity="{{ $js.Data.Integrity }}" crossorigin="anonymous"></script>
 {{ end }}
 
 {{ if isset .Site.Params "js_modules" }}

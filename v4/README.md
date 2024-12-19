@@ -1,21 +1,20 @@
 # Bilberry Hugo Theme v4
 
 [![GitHub version](https://img.shields.io/github/release/Lednerb/bilberry-hugo-theme/all.svg?style=flat-square)](https://github.com/Lednerb/bilberry-hugo-theme/releases)
-[![Hugo Version](https://img.shields.io/badge/Hugo-%5E0.109.0-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
+[![Hugo Version](https://img.shields.io/badge/Hugo-%5E0.125.7-ff4088?style=flat-square&logo=hugo)](https://gohugo.io/)
 [![Hugo Themes](https://img.shields.io/badge/Hugo_Themes-@Bilberry-ff4088)](https://themes.gohugo.io/themes/bilberry-hugo-theme/)
 
 [![Build GH-Pages](https://github.com/Lednerb/bilberry-hugo-theme/workflows/Update%20GitHub%20Pages/badge.svg)](https://github.com/Lednerb/bilberry-hugo-theme/deployments/activity_log?environment=github-pages)
-[![Contributors](https://img.shields.io/badge/contributors-48-orange.svg?style=flat-square)](#contributors)
+[![Contributors](https://img.shields.io/badge/contributors-52-orange.svg?style=flat-square)](#contributors)
 [![License](https://img.shields.io/github/license/Lednerb/bilberry-hugo-theme.svg?style=flat-square)](https://github.com/Lednerb/bilberry-hugo-theme/blob/master/LICENSE.md)
 
 ----
 
-This guide is for `v4` version. For `v3`, please use this [guide](../v3-README.md).
+This guide is for the `v4` version. For `v3`, please use this [guide](../v3-README.md).
 
-**IMPORTANT** `v3` will be supported until **August 31, 2024**. Only critical bugs will be fixed during this period, no
-new features will be implemented. If you want to migrate from `v3` to `v4`, please read the migration [guide](v4-migration-guide.md).
+**IMPORTANT** `v3` is no longer supported. If you want to migrate from `v3` to `v4`, please read the migration [guide](../v4/v4-migration-guide.md).
 
-For those who want to contribute to or customize the Bilberry Hugo theme, please see the developer [guide](v4-developer-guide.md).
+For those who want to contribute to or customize the Bilberry Hugo theme, please see the developer [guide](../v4/v4-developer-guide.md).
 
 ----
 
@@ -35,8 +34,8 @@ Please use the following guidelines if you want to start a discussion:
 
 - For any questions regarding a specific feature, or if you need help using or customizing the theme, use the **Questions & Answers** (**Q&A**) category.
 - To propose a new feature or any other improvements, use the **Ideas** category.
-- To showcase your blog or website powered by Bilberry theme, use the **Show and tell** category.
-- For any other inquiries, please use the **General** type discussion.
+- To showcase your blog or website powered by the Bilberry theme, use the **Show and tell** category.
+- Please use the **General** type discussion for any other inquiries.
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
@@ -58,6 +57,7 @@ Please use the following guidelines if you want to start a discussion:
     - [Single Page](#single-page)
     - [Page Bundle](#page-bundle)
   - [Top Navigation Bar](#top-navigation-bar)
+  - [Light/Dark Theme Mode](#lightdark-theme-mode)
   - [Algolia Search](#algolia-search)
     - [Initial Setup](#initial-setup)
     - [Update Algolia Index](#update-algolia-index)
@@ -74,10 +74,12 @@ Please use the following guidelines if you want to start a discussion:
   - [Open Graph Metadata](#open-graph-metadata)
   - [Table of Contents (TOC)](#table-of-contents-toc)
   - [Series Taxonomy](#series-taxonomy)
-  - [External Images](#external-images)
-  - [Image Modal Zoom](#image-modal-zoom)
-  - [Featured Image](#featured-image)
-  - [Automatic Image Resizing](#automatic-image-resizing)
+  - [Images](#images)
+    - [External Images](#external-images)
+    - [Image Modal Zoom](#image-modal-zoom)
+    - [Featured Image](#featured-image)
+    - [Automatic Image Resizing](#automatic-image-resizing)
+    - [Hyperlink Image](#hyperlink-image)
   - [Video](#video)
     - [PeerTube Configuration](#peertube-configuration)
   - [Audio](#audio)
@@ -100,7 +102,7 @@ Please use the following guidelines if you want to start a discussion:
   - [Custom Post Types](#custom-post-types)
   - [Individual Posts](#individual-posts)
   - [Syntax Highlighting](#syntax-highlighting)
-  - [Colors and Fonts](#colors-and-fonts)
+  - [Layout, Colors and Fonts](#layout-colors-and-fonts)
   - [CSS and JS modules](#css-and-js-modules)
   - [Cookie Disclaimer (GDPR)](#cookie-disclaimer-gdpr)
 - [Translations](#translations)
@@ -112,9 +114,9 @@ Please use the following guidelines if you want to start a discussion:
 
 ## Requirements
 
-- **Hugo** (version >= 0.109.0 **extended**), see this [guide](https://gohugo.io/getting-started/installing/) on how to install Hugo.
+- **Hugo** (version >= 0.125.7 **extended**), see this [guide](https://gohugo.io/getting-started/installing/) on how to install Hugo.
 - **Git**, see this [guide](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git) on how to install Git.
-- **Go** (version >= 1.19), optional, required only when the Bilberry theme is used as a Hugo module; see
+- **Go** (version >= 1.21), optional, required only when the Bilberry theme is used as a Hugo module; see
   this [guide](https://go.dev/doc/install) on how to install Go.
 
 ## Quick Start
@@ -142,18 +144,12 @@ hugo new site my-new-blog
 rm my-new-blog/archetypes/default.md
 ```
 
-- Copy the example site content, including the `config.toml` file:
-
-```shell
-cp -r bilberry-hugo-theme/v4/exampleSite/* my-new-blog
-```
-
 ### Theme Installation Options
 
 #### Option 1 (recommended): Adding the Theme as a Hugo Module
 
-Use this option if you want to pull in the theme files as a Hugo module from the main Bilberry Hugo theme repository.
-This option makes it easy to keep the theme up to date in your site.
+Use this option if you want to pull in the theme files as a Hugo module from the main Bilberry Hugo
+theme repository. This option makes it easy to keep the theme up to date in your site.
 
 - Initialize your website as a Hugo module from the site's root:
 
@@ -162,13 +158,16 @@ cd my-new-blog
 hugo mod init github.com/<your-user>/my-new-blog
 ```
 
-Following the Hugo module initialization, you may have the following warning: module "
-github.com/Lednerb/bilberry-hugo-theme/v4" not found, which should be ignored.
-
-- Pull theme files to add new content to your website:
+- Copy the example site content, including the `hugo.toml` file:
 
 ```shell
-hugo mod vendor
+cp -r bilberry-hugo-theme/v4/exampleSite/* my-new-blog
+```
+
+- Pull theme files by updating theme's module:
+
+```shell
+hugo mod get -u
 ```
 
 If you need more details on how to use Hugo modules, please read
@@ -179,15 +178,23 @@ the [Hugo documentation](https://gohugo.io/hugo-modules/use-modules/).
 Use this option if you want to pull in the theme files as a Git submodule from the main Bilberry Hugo theme repository.
 This option also makes it easy to keep the theme up to date in your site.
 
-- In the `my-new-blog/config.toml` file, uncomment the `theme` property for **Options 2 and 3**, and
-  comment out the `theme` property for **Option 1**:
+- Copy the example site content, including the `hugo.toml` file:
+
+```shell
+cp -r bilberry-hugo-theme/v4/exampleSite/* my-new-blog
+```
+
+- In the `my-new-blog/hugo.toml` file, uncomment the `path` property for **Options 2 and 3**, and
+  comment out the `path` property for **Option 1**:
 
 ```toml
-# Option 1 (recommended): adding the theme as a hugo module
-# theme = "github.com/Lednerb/bilberry-hugo-theme/v4"
+[module]
+  [[module.imports]]
+    # Option 1 (recommended): adding the theme as a Hugo module
+    # path = "github.com/Lednerb/bilberry-hugo-theme/v4"
 
-# Options 2 and 3: cloning/copying the theme files
-theme = "bilberry-hugo-theme/v4"
+    # Options 2 and 3: cloning/copying the theme files
+    path = "bilberry-hugo-theme/v4"
 ```
 
 - Add the Bilberry Hugo theme as a Git submodule from the site's root:
@@ -198,20 +205,28 @@ $ git submodule add https://github.com/Lednerb/bilberry-hugo-theme.git themes/bi
 
 #### Option 3: Copying the Theme Files
 
-Use this option if you want to directly customize and maintain your own copy of the theme.
+Use this option if you want to customize and maintain your own copy of the theme directly.
 
-- In the `my-new-blog/config.toml` file, uncomment the `theme` property for **Options 2 and 3**, and
-  comment out the `theme` property for **Option 1**:
+- Copy the example site content, including the `hugo.toml` file:
 
-```toml
-# Option 1 (recommended): adding the theme as a hugo module
-# theme = "github.com/Lednerb/bilberry-hugo-theme/v4"
-
-# Options 2 and 3: cloning/copying the theme files
-theme = "bilberry-hugo-theme/v4"
+```shell
+cp -r bilberry-hugo-theme/v4/exampleSite/* my-new-blog
 ```
 
-- Copy cloned (or unzipped) theme files in previous step to the `my-new-blog/themes` directory:
+- In the `my-new-blog/hugo.toml` file, uncomment the `path` property for **Options 2 and 3**, and
+  comment out the `path` property for **Option 1**:
+
+```toml
+[module]
+  [[module.imports]]
+    # Option 1 (recommended): adding the theme as a Hugo module
+    # path = "github.com/Lednerb/bilberry-hugo-theme/v4"
+
+    # Options 2 and 3: cloning/copying the theme files
+    path = "bilberry-hugo-theme/v4"
+```
+
+- Copy cloned (or unzipped) theme files in the previous step to the `my-new-blog/themes` directory:
 
 ```shell
 cp -r bilberry-hugo-theme my-new-blog/themes/bilberry-hugo-theme
@@ -222,11 +237,11 @@ Renaming this folder will break your site.
 
 ### Configuration
 
-To customize your website according to your needs, edit the `config.toml` file in the site's root
+To customize your website according to your needs, edit the `hugo.toml` file in the site's root
 directory by adjusting the settings. All parameters that need to be configured are commented out or
 disabled.
 
-The Algolia Search is enabled in the `config.toml` file that comes with the example site; therefore,
+The Algolia Search is enabled in the `hugo.toml` file that comes with the example site; therefore,
 if you don't plan to use it, disable it by setting the `algolia_search` property to `false`.
 
 ### Webserver
@@ -257,7 +272,7 @@ the [issue](https://github.com/Lednerb/bilberry-hugo-theme/discussions/448) with
 ### Default Post Types
 
 Bilberry theme comes with a set of predefined post types, namely `article`, `audio`, `code`, `gallery`, `link`, `page`
-, `quote`, `status`, and `video` where the `article` type is the default one.
+, `quote`, `status`, and `video`, where the `article` type is the default.
 
 To create a new content, use the `hugo new` command. Content can be created in two ways: a single page or
 a [page bundle](https://gohugo.io/content-management/page-bundles/).
@@ -297,12 +312,19 @@ The `link` post type always links to an external site and can be used with or wi
 ### Top Navigation Bar
 
 If you want to permanently display the top navigation bar with the search text field and `page` items, set
-the `permanentTopNav` parameter to `true` in the `config.toml` file.
+the `permanentTopNav` parameter to `true` in the `hugo.toml` file.
 
 If you want to display the top navigation bar when scrolling down the page, set the `stickyNav` parameter to `true`. But
 this will only work when the `permanentTopNav` is also set to `true`.
 
 Please note that the top navigation bar is minimized by default on mobile devices.
+
+### Light/Dark Theme Mode
+Switching between light and dark theme mode can be enabled by setting the `enableLightDarkTheme` parameter to `true`:
+```toml
+[params]
+  enableLightDarkTheme = true
+```
 
 ### Algolia Search
 
@@ -314,11 +336,11 @@ and typing something in the search text field, such as "support."
 
 To enable and configure search functionality for your site, follow these steps:
 
-1. Register for a free Algolia Search account on https://www.algolia.com/.
+1. Register for a free Algolia Search account at https://www.algolia.com/.
 2. Add a `New Application`. You can choose the `COMMUNITY` plan.
 3. Switch over to `Indices` and create a new index.
-4. Switch over to `API Keys` and copy your `Application ID`, `Search-Only API Key` and chosen `Index name` to
-   your `config.toml` file.
+4. Switch over to `API Keys` and copy your `Application ID`, `Search-Only API Key`, and chosen `Index name` to
+   your `hugo.toml` file.
 5. Make sure that the `algolia_search` parameter is set to  `true`.
 6. Follow the instructions in the section [Update Algolia Index](#update-algolia-index) and proceed to the next step.
 7. To complete the initial setup, go to the tab `Configuration` of your newly created indices, select the `Facets` in
@@ -388,7 +410,7 @@ original_url: "https://example.org/path/to/content"
 
 ### Estimated Reading Time
 
-To show an article's estimated reading time, set the `showReadingTime` parameter to `true` in the `config.toml` file.
+To show an article's estimated reading time, set the `showReadingTime` parameter to `true` in the `hugo.toml` file.
 You can override the estimated reading time by setting the article's `readingTime` front matter variable to a value you
 want. If you set this variable to `0`, the reading time will not be shown.
 
@@ -399,7 +421,7 @@ readingTime: 0 # reading time will not be shown
 
 ### Summary Splits
 
-There are three options for how Hugo can generate summaries of content which will be used as a short version in summary
+There are three options for how Hugo can generate summaries of content which will be used as a short version in the summary
 views, such as a home page and tags or categories pages.
 
 #### Automatic Summary Split
@@ -451,11 +473,11 @@ series: ["My Cool Series"]
 
 To enable the automatic creation of a table of contents (TOC), set the `toc` front matter variable to `true` in your
 article.
-If the article's markdown contains appropriate headings, Hugo will generate a table of content at the beginning of the
+If the article's markdown contains appropriate headings, Hugo will generate a table of contents at the beginning of the
 article.
 
 By default, a TOC is generated if the content's word count is greater than **400**.
-The `tocMinWordCount` parameter defines this value in the `config.toml` configuration file.
+The `tocMinWordCount` parameter defines this value in the `hugo.toml` configuration file.
 
 The headings that are taken into account for a TOC are from _H2_ (##) to _H5_ (#####) inclusive.
 Also, if you want to display a TOC at a specific point in your article, set the `toc` front matter variable to `false`,
@@ -477,7 +499,9 @@ markdown, you can use the `series` shortcode with the series name in question, f
 {{< series "My New Super Series" >}}
 ```
 
-### External Images
+### Images
+
+#### External Images
 
 If you would like to use external images, such as those stored on another server or in the cloud, as
 a featured image for your article or in the `gallery` post type, you can use them by setting the
@@ -499,14 +523,14 @@ gallery: [
 ]
 ```
 
-### Image Modal Zoom
+#### Image Modal Zoom
 
 When you include an image larger than the content area, the image becomes interactive, and a larger version can be
 opened in a lightbox. Modal zoom will work only for images that are added using the standard markdown
 annotation, e.g., `![Image alt text](/my_image.png)` or `![Image alt text](/my_image.png "Image figure caption")` for
 images with a figure caption. Please note that this feature will not work for images added using raw HTML.
 
-### Featured Image
+#### Featured Image
 
 There are two options for adding a featured image to a post. The first approach is to use a [single-page](#single-page)
 post with the `featuredImage` front matter variable, where the value for this variable should be either the path
@@ -524,16 +548,26 @@ content
         └── index.md
 ```
 
-### Automatic Image Resizing
+#### Automatic Image Resizing
 
-Bilberry theme includes built-in automatic cropping and resizing only for **featured** and **gallery** images, activated
-by default. However, if you want to disable it, set the `resizeImages` parameter to `false` in the `config.toml` file.
-Also, this feature can be disabled at the post level by setting the `resizeImages` front matter variable to `false`.
+Bilberry theme includes built-in automatic cropping and resizing only for **featured** and **gallery**
+ images, activated by default. However, if you want to disable it, set the `resizeImages`
+parameter to `false` in the `hugo.toml` file. Also, this feature can be disabled at the post level
+by setting the `resizeImages` front matter variable to `false`.
 
-For a featured image to be cropped and resized, it should be named `featuredImage.*` and placed within the page bundle
-folder.
+For a featured image to be cropped and resized, it should be named `featuredImage.*` and placed
+within the page bundle's folder.
 
-**NOTE**: a featured image defined via the `featuredImage` front matter parameter will **NOT** be cropped and resized.
+**NOTE**: a featured image defined via the `featuredImage` front matter parameter will **NOT** be
+cropped and resized.
+
+#### Hyperlink Image
+
+If you want to display an image as a hyperlink, use the `hyperlink-image` shortcode as follows:
+
+```markdown
+{{< hyperlink-image "<image-text>" "<image-url>" "<link-url>" >}}
+```
 
 ### Video
 
@@ -662,18 +696,13 @@ The second option is to use the `audio` shortcode within markdown content in a p
 
 Bilberry theme comes with built-in support for both v3 and v4
 of [Google Analytics](https://analytics.google.com/analytics/web/).
-You should set the value of the `googleAnalytics` property in the `config.toml` file to enable it.
+To enable it, set the value of the `services.googleAnalytics.ID` property in the `hugo.toml`.
 
-Such value for Universal Analytics v3 is prefixed with the `UA` letters.
-So, suppose you migrate your existing website to the Bilberry theme, and your website is already tracked in Universal
-Analytics, given that the corresponding property was created before October 14, 2020.
-In that case, you should continue using the v3 value in the `config.toml` file.
-But given that Universal Analytics will no longer process new data in standard properties beginning July 1, 2023, you
-will have to create a Google Analytics v4 property linked to your v3 property.
-
-If you created your property after October 14, 2020, you're likely using a Google Analytics v4 property already, and the
-value for such property is prefixed with the `G` letter.
-In that case, you should use the v4 value in the `config.toml` file.
+```yaml
+[services]
+  [services.googleAnalytics]
+    ID = 'G-XXXXXXXXXX'
+```
 
 ### Comments
 
@@ -683,7 +712,7 @@ To allow readers to comment under your articles, you can use either [Commento](h
 **Note to developers/contributors**: if you want to submit a new commenting engine for integration with the Bilberry theme, it must meet the following criteria:
 1. The engine should be offered as a SAAS, i.e., you only need to create an account and configure the necessary settings on the engine's website.
 2. If the engine is offered as a SAAS, it must have a free tier plan.
-3. All the configuration steps needed to integrate a third-party commenting service must occur only in the `config.toml` file and not within additional configuration in the partial files or any other.
+3. All the configuration steps needed to integrate a third-party commenting service must occur only in the `hugo.toml` file and not within additional configuration in the partial files or any other.
 
 
 #### Commento
@@ -694,7 +723,7 @@ which is not free of cost.
 In case you want to use Self-hosting Commento, follow
 these [instructions](https://docs.commento.io/installation/self-hosting/).
 
-Then uncomment the `commentoJsURL` parameter in the `config.toml` file:
+Then uncomment the `commentoJsURL` parameter in the `hugo.toml` file:
 
 ```toml
 #[...]
@@ -708,7 +737,7 @@ Then uncomment the `commentoJsURL` parameter in the `config.toml` file:
 #### Disqus
 
 To allow readers to leave comments under your articles, sign up for free on [Disqus](https://disqus.com) website.
-Then create a new site and set the `disqusShortname` parameter to your site's short name in the `config.toml` file:
+Then create a new site and set the `disqusShortname` parameter to your site's short name in the `hugo.toml` file:
 
 ```toml
 #[...]
@@ -726,7 +755,7 @@ You can manage and moderate the comments either on your website or using the Dis
 Follow instructions on [Giscus](https://giscus.app/) website.
 Once you complete the prerequisites for your GitHub repository and select a discussion category, values
 for `giscusRepositoryId` and `giscusCategoryId` will be automatically generated.
-Then, in the `config.toml` file, set the `giscus` parameter to `true` and the properties mentioned above, respectively:
+Then, in the `hugo.toml` file, set the `giscus` parameter to `true` and the properties mentioned above, respectively:
 
 ```toml
 #[...]
@@ -742,6 +771,7 @@ Then, in the `config.toml` file, set the `giscus` parameter to `true` and the pr
   giscusCategory = "General"
   giscusCategoryId = "DIC_kwDOGX153M4B_2Vz" # generated by Giscus website
   giscusTheme = "light"
+  giscusDarkTheme = "dark"
   giscusReactions = "1"
   giscusEmitMetadata = "0"
   giscusLanguage = "en"
@@ -752,7 +782,7 @@ Then, in the `config.toml` file, set the `giscus` parameter to `true` and the pr
 
 Follow instructions on [Utterances](https://utteranc.es/) website.
 Once you complete the prerequisites for your GitHub repository, set the `utterances` parameter to `true` in
-the `config.toml` file:
+the `hugo.toml` file:
 
 ```toml
 #[...]
@@ -789,12 +819,12 @@ the `/archive/` value and completely remove the `target` variable.
 
 ### Responsive Design
 
-Bilberry theme is optimized to look good on all devices, namely desktops, tablets and smartphones.
+Bilberry theme is optimized to look good on all devices, namely desktops, tablets, and smartphones.
 
 ### MathJAX Markup
 
 To enable the [MathJAX](https://www.mathjax.org) markup support, set the `enable_mathjax` parameter to `true` in
-the `config.toml` file.
+the `hugo.toml` file.
 
 ### Disabled JavaScript Support
 
@@ -816,7 +846,7 @@ reduce the bundle size by ~262 kB gzipped.
 
 ### Raw HTML
 
-If you want to include raw HTML in your markdown content, set the `unsafe` setting in the `config.toml` file to `true`:
+If you want to include raw HTML in your markdown content, set the `unsafe` setting in the `hugo.toml` file to `true`:
 
 ```toml
 [markup.goldmark]
@@ -891,7 +921,7 @@ You can customize your posts as follows:
 1. To exclude posts from your blog's index but still show up in categories, add `excludeFromIndex: true` to your post's
    front matter.
 
-2. To pin one or more posts to the top of the index page, uncomment the `pinnedPost` parameter in the `config.toml`
+2. To pin one or more posts to the top of the index page, uncomment the `pinnedPost` parameter in the `hugo.toml`
    file.
    Then set its value to the post's relative URL, for example, `/article/installing-bilberry-theme/`.
    When pinning multiple posts, the relative URL values should be separated by a comma.
@@ -912,7 +942,7 @@ built-in [Chrome](https://github.com/alecthomas/chroma) code highlighter. Highli
 be customized at the site level or per code block.
 
 To change the default configuration at the site level, adjust the properties in the `[markup.highlight]` section of
-the `config.toml` file. For example, you can change the default `monokai` style to the one from
+the `hugo.toml` file. For example, you can change the default `monokai` style to the one from
 the [Chroma Style Gallery](https://xyproto.github.io/splash/docs/all.html).
 
 Per the code block, the following parameters can be
@@ -926,13 +956,13 @@ personalized: `linenos`, `hl_lines`, `linenostart`, `anchorlinenos`, `lineanchor
 
 Read Hugo's [documentation](https://gohugo.io/content-management/syntax-highlighting/) for more details.
 
-### Colors and Fonts
+### Layout, Colors and Fonts
 
-Styling is implemented using SCSS along with [npm](https://www.npmjs.com/), which is only used for dependency management. Colors and fonts can be customized via variables defined in
+Site layout and styling are implemented using SCSS along with [npm](https://www.npmjs.com/), which is only used for dependency management. Layout, colors and fonts can be customized via variables defined in
 the [`assets/sass/theme.scss`](assets/sass/theme.scss) file.
 
 For example, if you want to customize the `$base-color` variable, you should define the `baseColor` parameter in your
-site's `config.toml` file.
+site's `hugo.toml` file.
 
 ```sass
 $base-color: {{ .Param "baseColor" | default "#1d1f38" }};
@@ -946,11 +976,15 @@ $base-color: {{ .Param "baseColor" | default "#1d1f38" }};
 ### CSS and JS modules
 
 This theme supports hot-swappable CSS and JavaScript extensions, which can be specified using the `css_modules`
-and `js_modules` list parameters in your site's `config.toml` file. Modules can be specified either relative to the `static`
-directory (e.g., `exampleSite/static/css/custom.css`) or as a URL.
+and `js_modules` list parameters in your site's `hugo.toml` file. Modules can be specified either relative to the `static`
+directory (e.g., `exampleSite/static/custom.css`) or as a URL:
 
-Modules are imported in the order they appear in the list, and immediately after the default Bilberry CSS and JS files
-are imported.
+```toml
+[params]
+  css_modules = ["custom.css","//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css"]
+```
+
+Modules are imported in the order they appear in the list and processed immediately after the default Bilberry CSS and JS files.
 
 ### Cookie Disclaimer (GDPR)
 
@@ -976,15 +1010,15 @@ window.addEventListener('load', function () {
 })
 ```
 
-Then you only need to modify the `config.toml` file to load the local init script and the libraries.
+Then you only need to modify the `hugo.toml` file to load the local init script and the libraries.
 You can either download the files and put them in your site's `/static` directory or reference them directly using a
 CDN.
 Storing these files on your website reduces external dependencies, increases privacy, and allows you to develop your
 website in an offline environment.
 
 ```toml
-css_modules = ["..", "//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css"]
-js_modules = ["..", "//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js", "init-cookieconsent.js"]
+css_modules = ["//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.css"]
+js_modules = ["//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.1.0/cookieconsent.min.js","init-cookieconsent.js"]
 ```
 
 ## Translations
@@ -1007,22 +1041,7 @@ create the `index.json` for the Algolia index.
 
 ## Contributors
 
-Many thanks go to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
-
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
-
-| [<img src="https://avatars1.githubusercontent.com/u/2056876?v=4" width="100px;"/><br /><sub><b>Sascha Brendel</b></sub>](https://sascha-brendel.de)<br />[💬](#question-Lednerb "Answering Questions") [📝](#blog-Lednerb "Blogposts") [💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=Lednerb "Code") [🎨](#design-Lednerb "Design") [📖](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=Lednerb "Documentation") [🌍](#translation-Lednerb "Translation") | [<img src="https://anna-brendel.de/images/background1.jpg" width="100px;"/><br /><sub><b>Anna Brendel</b></sub>](https://anna-brendel.de)<br />[🤔](#ideas "Ideas, Planning, & Feedback") [🌍](#translation "Translation") | [<img src="https://avatars2.githubusercontent.com/u/1560404?v=4" width="100px;"/><br /><sub><b>Givi Khojanashvili</b></sub>](https://www.linkedin.com/in/khojanashvili/)<br />[💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=gigovich "Code") | [<img src="https://avatars2.githubusercontent.com/u/28822504?v=4" width="100px;"/><br /><sub><b>Chung Tran Anh</b></sub>](https://github.com/anhchungite)<br />[💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=anhchungite "Code") [🌍](#translation-anhchungite "Translation") | [<img src="https://avatars0.githubusercontent.com/u/3048682?v=4" width="100px;"/><br /><sub><b>Minke Zhang</b></sub>](http://blogzhang.com)<br />[💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=cripplet "Code") |
-| :---: | :---: | :---: | :---: | :---: |
-| [<img src="https://avatars1.githubusercontent.com/u/16353578?v=4" width="100px;"/><br /><sub><b>Pavel Kanyshev</b></sub>](https://github.com/aerohub)<br />[💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=aerohub "Code") [🌍](#translation-aerohub "Translation") | [<img src="https://avatars3.githubusercontent.com/u/3541050?v=4" width="100px;"/><br /><sub><b>Marcel Kraus</b></sub>](https://www.marcelkraus.de)<br />[💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=marcelkraus "Code") | [<img src="https://avatars2.githubusercontent.com/u/280825?v=4" width="100px;"/><br /><sub><b>Nick Busey</b></sub>](http://nickbusey.com/)<br />[💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=NickBusey "Code") | [<img src="https://avatars1.githubusercontent.com/u/4789253?v=4" width="100px;"/><br /><sub><b>lkorzen</b></sub>](https://github.com/lkorzen)<br />[🌍](#translation-lkorzen "Translation") | [<img src="https://avatars1.githubusercontent.com/u/12019608?v=4" width="100px;"/><br /><sub><b>Chris Stayte</b></sub>](http://www.chrisstayte.com)<br />[🐛](https://github.com/Lednerb/bilberry-hugo-theme/issues?q=author%3AChrisStayte "Bug reports") |
-| [<img src="https://avatars0.githubusercontent.com/u/405277?v=4" width="100px;"/><br /><sub><b>Dmitry Matrosov</b></sub>](https://twitter.com/amidos_me)<br />[💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=meAmidos "Code") | [<img src="https://avatars2.githubusercontent.com/u/8802277?v=4" width="100px;"/><br /><sub><b>Marc-Antoine</b></sub>](https://marca.finch4.xyz/)<br />[💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=Embraser01 "Code") [🐛](https://github.com/Lednerb/bilberry-hugo-theme/issues?q=author%3AEmbraser01 "Bug reports") | [<img src="https://avatars1.githubusercontent.com/u/2030983?v=4" width="100px;"/><br /><sub><b>Nina Zakharenko</b></sub>](http://nnja.io)<br />[💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=nnja "Code") [🐛](https://github.com/Lednerb/bilberry-hugo-theme/issues?q=author%3Annja "Bug reports") [📖](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=nnja "Documentation") | [<img src="https://avatars1.githubusercontent.com/u/7719018?v=4" width="100px;"/><br /><sub><b>Nisarga</b></sub>](https://github.com/nisargap)<br />[💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=nisargap "Code") | [<img src="https://avatars2.githubusercontent.com/u/2817480?v=4" width="100px;"/><br /><sub><b>Pablo Domingo Rojo</b></sub>](https://github.com/pdoro)<br />[💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=pdoro "Code") |
-| [<img src="https://avatars3.githubusercontent.com/u/4433144?v=4" width="100px;"/><br /><sub><b>Rob Baruch</b></sub>](https://github.com/rabarar)<br />[💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=rabarar "Code") | [<img src="https://avatars0.githubusercontent.com/u/9339576?v=4" width="100px;"/><br /><sub><b>Taoshi</b></sub>](https://github.com/GMpet)<br />[🌍](#translation-GMpet "Translation") | [<img src="https://avatars1.githubusercontent.com/u/11535575?v=4" width="100px;"/><br /><sub><b>nonumeros</b></sub>](https://github.com/nonumeros)<br />[💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=nonumeros "Code") | [<img src="https://avatars3.githubusercontent.com/u/56372?v=4" width="100px;"/><br /><sub><b>Marcelo Gonçalves</b></sub>](http://marcelogoncalves.com.br)<br />[🌍](#translation-marcelocg "Translation") | [<img src="https://avatars0.githubusercontent.com/u/9111944?v=4" width="100px;"/><br /><sub><b>Dávid Sárkány</b></sub>](https://sarkanydavid.com)<br />[🌍](#translation-davidsarkany "Translation") |
-| [<img src="https://avatars3.githubusercontent.com/u/43414238?v=4" width="100px;"/><br /><sub><b>meonamz</b></sub>](https://github.com/meonamz)<br />[🌍](#translation-meonamz "Translation") | [<img src="https://avatars3.githubusercontent.com/u/32282514?v=4" width="100px;"/><br /><sub><b>Hamza Yusuf Çakır</b></sub>](https://github.com/hycakir)<br />[🌍](#translation-hycakir "Translation") | [<img src="https://avatars3.githubusercontent.com/u/15079172?s=460&v=4" width="100px;"/><br /><sub><b>Niclas Roßberger</b></sub>](https://github.com/nidomiro)<br />[💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=nidomiro "Code") [🐛](https://github.com/Lednerb/bilberry-hugo-theme/issues?q=author:nidomiro "Bug reports") [🚧](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=nidomiro "maintenance") | [<img src="https://www.kiroule.com/avatar.png" width="100px;"/><br/><sub><b>Igor Baiborodine</b></sub>](https://kiroule.com)<br />[💻](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=igor-baiborodine "Code") [🐛](https://github.com/Lednerb/bilberry-hugo-theme/issues/created_by/igor-baiborodine "Bug reports") [📖](https://github.com/Lednerb/bilberry-hugo-theme/commits?author=igor-baiborodine "Documentation")
-
-<!-- ALL-CONTRIBUTORS-LIST:END -->
-
-This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions
-of any kind welcome!
+Many thanks go to these wonderful [people](https://github.com/Lednerb/bilberry-hugo-theme/graphs/contributors). This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind are welcome!
 
 ## License
 

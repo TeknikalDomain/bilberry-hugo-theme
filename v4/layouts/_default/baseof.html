@@ -43,7 +43,7 @@
 
 <html itemscope itemtype="https://schema.org/WebPage" class="no-js" lang="{{ .Site.Language.Lang }}">
 
-<head>
+<head prefix="og: http://ogp.me/ns#">
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="siteBaseUrl" content="{{ .Site.BaseURL }}">
@@ -77,6 +77,10 @@
     <link rel="canonical" href="{{ . }}" />
     {{ else }}
     <link rel="canonical" href="{{ .Permalink }}">
+    {{ end }}
+
+    {{ if .Site.Params.enableLightDarkTheme | default false }}
+        {{ partial "check-theme-prefer.html" . }}
     {{ end }}
 
     {{ partial "css.html" . }}
